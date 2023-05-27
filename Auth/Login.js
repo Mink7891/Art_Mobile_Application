@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   content: {
     width: '100%',
-    height: '45%',
+    height: 300,
     borderRadius: 50,
     backgroundColor: 'rgba(0,0,0,0.45)'
   },

@@ -204,7 +204,8 @@ const Registration = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    justifyContent: 'center'
+    // justifyContent: 'center'
+    paddingTop: '25%',
   },
   loaderWrapper: {
     position: 'absolute',
@@ -219,7 +220,7 @@ const styles = StyleSheet.create({
   },
   content: {
     width: '100%',
-    height: '75%',
+    height: 600,
     borderRadius: 50,
     backgroundColor: 'rgba(0,0,0,0.45)'
   },
