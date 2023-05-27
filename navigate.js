@@ -50,6 +50,7 @@ export default function Navigate() {
         }}/>
         <Tab.Screen name="MapsPage" component={MoscowMap} options={{
           title: 'Карта',
+          unmountOnBlur: true,
           tabBarIcon: () => (
             <MaterialCommunityIcons name="google-maps" color='black' size={25}/>
           )
