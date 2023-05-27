@@ -41,7 +41,7 @@ const geocodeAddress = async (address) => {
       const response = await axios.get(
         `https://geocode-maps.yandex.ru/1.x/?format=json&geocode=${encodeURIComponent(
           address
-        )}&apikey=3def7766-dde6-4c97-a197-5c3ac2a26e4b`
+        )}&apikey=f65649d6-e1b7-4850-a9f0-5c4590ef957b`
       );
       const data =  await response.data;
       const foundLocations = data.response.GeoObjectCollection.featureMember;
