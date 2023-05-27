@@ -5,6 +5,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 import RegistrationPage from "./pages/RegistrationPage";
@@ -50,7 +51,7 @@ export default function Navigate() {
         <Tab.Screen name="MapsPage" component={EmptyPage} options={{
           title: 'Карта',
           tabBarIcon: () => (
-            <FontAwesome5 name="tasks" color='black' size={25}/>
+            <MaterialCommunityIcons name="google-maps" color='black' size={25}/>
           )
         }}/>
         <Tab.Screen name="NewsLenta" component={EmptyPage} options={{
