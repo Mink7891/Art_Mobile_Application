@@ -1,5 +1,4 @@
 import React from "react";
-import NewsLenta from "./News/NewsLenta";
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -10,7 +9,6 @@ import Entypo from "react-native-vector-icons/Entypo";
 
 import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
-import Registration from "./Auth/Registration";
 import {useSelector} from "react-redux";
 
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
