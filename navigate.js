@@ -16,7 +16,7 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
 import EmptyPage from "./pages/EmptyPage";
 import Profile from "./Auth/Profile";
-
+import MoscowMap from './FoldersScripts/MoscowMap';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -48,7 +48,7 @@ export default function Navigate() {
             <AntDesign name="iconfontdesktop" color='black' size={25}/>
           )
         }}/>
-        <Tab.Screen name="MapsPage" component={EmptyPage} options={{
+        <Tab.Screen name="MapsPage" component={MoscowMap} options={{
           title: 'Карта',
           tabBarIcon: () => (
             <MaterialCommunityIcons name="google-maps" color='black' size={25}/>

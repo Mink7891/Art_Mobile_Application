@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Dimensions, ScrollView } from 'react-native';
 import directions from '../direction.json'; // направление
 import districts from '../district.json'; // округ
+import { processAddresses } from './getDistrictByAddress';
 
 const windowHeight = Dimensions.get('window').height;
 
-const Filter = ({ onDirectionFilter, onDistrictFilter, selectedDirections, selectedDistricts }) => {
+const Filter = ({ onDirectionFilter, onDistrictFilter, onAreaFilter, selectedDirections, selectedDistricts, selectedAreas }) => {
   const [directionsVisible, setDirectionsVisible] = useState(false);
   const [districtsVisible, setDistrictsVisible] = useState(false);
+  const [areasVisible, setAreasVisible] = useState(false);
+  const [addresses, setAddresses] = useState([]);
+    
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const addresses = await processAddresses(); // Вызываем функцию processAddresses() для получения списка адресов
+      setAddresses(addresses); // Устанавливаем список адресов в состояние
+    };
+  
+    fetchData();
+  }, []);
 
   const handleDirectionPress = (direction) => {
     const isSelected = selectedDirections && selectedDirections.includes(direction);
@@ -31,19 +44,41 @@ const Filter = ({ onDirectionFilter, onDistrictFilter, selectedDirections, selec
     }
   };
 
+  const handleAreaPress = (address) => {
+    const isSelected = selectedAreas && selectedAreas.includes(address);
+  
+    if (isSelected) {
+      const filteredAreas = selectedAreas.filter((item) => item !== address);
+      onAreaFilter(filteredAreas);
+    } else {
+      onAreaFilter([...selectedAreas, address]);
+    }
+  };  
+  
   const handleBackPress = () => {
     setDirectionsVisible(false);
     setDistrictsVisible(false);
+    setAreasVisible(false);
+  };
+
+  const formatAreaName = (area) => {
+    // Удаляем слово "район" из названия района
+    return area.replace('район', '').trim();
   };
 
   return (
     <View style={styles.container}>
-      {!directionsVisible && !districtsVisible && (
+      {!directionsVisible && !districtsVisible && !areasVisible && (
         <TouchableOpacity style={styles.button} onPress={() => setDistrictsVisible(true)}>
           <Text style={styles.buttonText}>Фильтр по округу</Text>
         </TouchableOpacity>
       )}
-      {!directionsVisible && !districtsVisible && (
+      {!directionsVisible && !districtsVisible && !areasVisible && (
+        <TouchableOpacity style={styles.button} onPress={() => setAreasVisible(true)}>
+          <Text style={styles.buttonText}>Фильтр по району</Text>
+        </TouchableOpacity>
+      )}
+      {!directionsVisible && !districtsVisible && !areasVisible && (
         <TouchableOpacity style={styles.button} onPress={() => setDirectionsVisible(true)}>
           <Text style={styles.buttonText}>Фильтр по направлению</Text>
         </TouchableOpacity>
@@ -90,7 +125,29 @@ const Filter = ({ onDirectionFilter, onDistrictFilter, selectedDirections, selec
           </ScrollView>
         </View>
       )}
-      {(directionsVisible || districtsVisible) && (
+      {areasVisible && (
+        <View style={styles.directionsContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Выберите район</Text>
+          </View>
+          <ScrollView contentContainerStyle={styles.directionsScrollContainer}>
+            <Text></Text>
+          {addresses.map((address, index) => ( // Fix: Added the 'address' parameter to the map function
+            <TouchableOpacity
+              key={index}
+              style={[
+                styles.directionButton,
+                selectedAreas && selectedAreas.includes(address) && styles.selectedDirectionButton,
+              ]}
+              onPress={() => handleAreaPress(address)}
+            >
+              <Text style={styles.directionButtonText}>{formatAreaName(address)}</Text>
+            </TouchableOpacity>
+          ))}
+          </ScrollView>
+        </View>
+      )}
+      {(directionsVisible || districtsVisible || areasVisible) && (
         <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
           <Text style={styles.backButtonText}>Назад</Text>
         </TouchableOpacity>
