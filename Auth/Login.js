@@ -69,7 +69,7 @@ const Login = () => {
             <View style={{...styles.TextInputForm, marginBottom: 10}}>
               <TextInput
                 style={styles.TextInput}
-                placeholder="Login"
+                placeholder="Логин"
                 placeholderTextColor='white'
                 value={login}
                 onChangeText={(e) => setLogin(e)}
@@ -78,7 +78,7 @@ const Login = () => {
             <View style={styles.TextInputForm}>
               <TextInput
                 style={styles.TextInput}
-                placeholder="Password"
+                placeholder="Пароль"
                 placeholderTextColor='white'
                 value={password}
                 onChangeText={(e) => setPassword(e)}
