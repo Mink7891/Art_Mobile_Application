@@ -74,7 +74,7 @@ const News = () => {
                   <Image
                     source={{uri: item.news_img}}
                     key={item.id}
-                    resizeMode='stretch'
+                   
                     style={styles.image}
 
                   />
@@ -83,15 +83,14 @@ const News = () => {
                     bottom: 0,
                     right: 0,
                     left: 0,
-                    width: screenDimensions.width - 20,
-                    paddingRight: 12,
+                    padding : 10,
                     borderBottomLeftRadius: 24,
                     borderBottomRightRadius: 24,
-                    height: 140,
+                    height: 120,
                     backgroundColor: 'rgba(0,0,0,0.50)',
                     overflow: 'hidden'
                   }}>
-                    <Text style={styles.title}>
+                    <Text numberOfLines={4} style={styles.title} >
                       {item.news_title}
                     </Text>
                   </View>
@@ -114,7 +113,7 @@ const stylesMain = StyleSheet.create({
   wrapper: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#FFF1C5',
+    
   },
   list: {
     flex: 1,
@@ -126,23 +125,26 @@ const stylesMain = StyleSheet.create({
 
 const styles = StyleSheet.create({
   container: {
-    height: 300,
-    width: '90%',
+    marginTop : 10,
+    height: 280,
+    width: screenDimensions.width - 115,
     backgroundColor: '#eee',
     marginBottom: 24,
     borderRadius: 24,
+    
     // ...boxShadow
   },
   imageContainer: {
     flex: 1,
-    position: 'relative'
+    position: 'relative',
+   
   },
   image: {
     flex: 1,
     borderRadius: 24,
     height: 400,
     resizeMode: 'stretch',
-    width: screenDimensions.width - 20,
+    
   },
   title: {
     width: '100%',
@@ -150,7 +152,7 @@ const styles = StyleSheet.create({
     top: 5,
     left: 15,
     right: 5,
-    fontSize: 28,
+    fontSize: 20,
     fontWeight: 600,
     color: 'white',
   }

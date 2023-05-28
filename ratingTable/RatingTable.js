@@ -24,7 +24,7 @@ const RatingTable = () => {
     }
   }
 
-  console.log(users);
+  
 
   useEffect(() => {
     fetchRate();

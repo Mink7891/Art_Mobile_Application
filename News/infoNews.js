@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Image, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Image, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Dimensions,ImageBackground} from "react-native";
 
 const InfoNews = ({route, navigation}) => {
   const [desc, setDesc] = useState('');
   const [link, setLink] = useState('');
 
   const data = route.params.newsInfo;
+
+
+  const screenDimensions = Dimensions.get('screen');
 
   useEffect(() => {
     const sliceStr = data.news_desc.split('http')
@@ -14,7 +17,7 @@ const InfoNews = ({route, navigation}) => {
   }, [])
 
   return (
-    <View style={{backgroundColor: '#FFF1C5', flex: 1, paddingTop: 50}}>
+    <ImageBackground source={require('../assets/memoryCardBG.png')} style={{backgroundColor: '#FFF', flex: 1, paddingTop: 50}}>
       <SafeAreaView style={styles.modal}>
         <ScrollView>
           <View>
@@ -40,22 +43,24 @@ const InfoNews = ({route, navigation}) => {
                 {link}
               </Text>
             </TouchableOpacity>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Image
+                  style={{
+                    width : screenDimensions.width - 100,
 
-              <Image
-                style={{
-                  width: '100%',
-                  height: 400,
-                  resizeMode: 'cover',
-                  borderRadius: 24,
-                  marginTop: 20,
-                }}
-                source={{uri: data.news_img}}
-                key={data.id}
-              />
+                    height: 350,
+                    resizeMode: 'cover',
+                    borderRadius: 24,
+                    marginTop: 20,
+                  }}
+                  source={{uri: data.news_img}}
+                  key={data.id}
+                />
+              </View>
           </View>
         </ScrollView>
       </SafeAreaView>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -72,13 +77,13 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   modalTitle: {
-    fontSize: 36,
-    marginBottom: 15,
-    textAlign: 'left',
+    
+    fontSize: 25,
+    marginBottom: 4,
     color: 'black'
   },
   infoNews: {
-    marginTop: 15,
+    marginTop: 5,
     marginBottom: 10,
   },
   textInformationNews: {
