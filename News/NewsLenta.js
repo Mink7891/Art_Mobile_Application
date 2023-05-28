@@ -6,68 +6,116 @@ import {
   Image,
   FlatList,
   SafeAreaView,
-  TouchableOpacity, Button
+  TouchableOpacity, ActivityIndicator, Button
 
 } from "react-native";
 import React, {useEffect, useState} from "react";
 import Loader from "./Loader";
-import {useSelector} from "react-redux";
+import {useNavigation} from "@react-navigation/native";
+import $api from "../http";
+import Header from "../components/Header";
+import axios from "axios";
 
 const screenDimensions = Dimensions.get('screen');
 
-const News = ({navigation}) => {
-
-  const {userInfo, token, isAuth} = useSelector((state) => state.auth);
-
-  const [news, setNews] = useState();
+const News = () => {
+  const navigation = useNavigation();
+  const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+
+
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`http://46.243.227.254:8080/news/${page}`)
+      setNews(news.concat(response.data));
+    } catch (error) {
+      setError(error.message)
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    setIsLoading(true);
+    fetchData();
+  }, [page])
 
-    async function fetchNews() {
-      await fetch("http://localhost:8080/api/news")
-        .then((response) => response.json())
-        .then((result) => {
-          setNews(result)
-          setIsLoading(false);
-        })
-        .catch((error) => console.log(error));
+  const newPage = () => {
+    setPage(page + 1)
+  }
+
+
+  console.log(news?.length);
+
+  const ListEndLoader = () => {
+    if (isLoading) {
+      return <ActivityIndicator size={'large'} />;
     }
-
-  }, [])
+  };
 
 
   return (
     <SafeAreaView style={stylesMain.wrapper}>
-      <Button title="Профиль" onPress={() => navigation.navigate('Profile')}/>
+      <Header/>
       <View>
-        {isLoading
-          ? <Loader/>
-          : <FlatList data={news} renderItem={({item}) => (
-            <TouchableOpacity onPress={() => navigation.navigate('InfoNews', {
-              item
-            })}>
+        {
+          error
+          ? <Text style={{fontSize: 24, color: 'red'}}>
+              {error}
+            </Text>
+            : null
+        }
+        <FlatList
+          data={news}
+          showDefaultLoadingIndicators={true}
+          style={{
+            marginBottom: 60
+          }}
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('InfoNews', {
+                newsInfo: item,
+                title: item.news_title,
+              })
+            }}>
               <View style={styles.container}>
                 <View style={styles.imageContainer}>
                   <Image
                     source={{uri: item.news_img}}
                     key={item.id}
+                    resizeMode='stretch'
                     style={styles.image}
+
                   />
-                  <Text style={styles.title}>
-                    {item.news_title?.split(' ').length > 5
-                      ? item.news_title?.split(' ')?.slice(0, 5) + ' ...'
-                      : item.news_title
-                    }
-                  </Text>
+                  <View style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    width: screenDimensions.width - 20,
+                    paddingRight: 12,
+                    borderBottomLeftRadius: 24,
+                    borderBottomRightRadius: 24,
+                    height: 140,
+                    backgroundColor: 'rgba(0,0,0,0.50)',
+                    overflow: 'hidden'
+                  }}>
+                    <Text style={styles.title}>
+                      {item.news_title}
+                    </Text>
+                  </View>
+
                 </View>
               </View>
             </TouchableOpacity>
           )
-          }/>
-        }
+          }
+          onEndReached={newPage}
+          onEndReachedThreshold={0.4}
+          istFooterComponent={ListEndLoader}
+        />
       </View>
     </SafeAreaView>
   )
@@ -102,7 +150,8 @@ const stylesMain = StyleSheet.create({
 
 const styles = StyleSheet.create({
   container: {
-    height: 240,
+    height: 300,
+    width: '90%',
     backgroundColor: '#eee',
     marginBottom: 24,
     borderRadius: 24,
@@ -115,12 +164,14 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     borderRadius: 24,
-    height: 300,
+    height: 400,
+    resizeMode: 'stretch',
     width: screenDimensions.width - 20,
   },
   title: {
+    width: '100%',
     position: 'absolute',
-    bottom: 10,
+    top: 5,
     left: 15,
     right: 5,
     fontSize: 28,

@@ -1,11 +1,25 @@
-import React, {useEffect} from 'react';
-import {Image, SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
+import React, {useEffect, useState} from 'react';
+import {Image, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 const InfoNews = ({route}) => {
-  const data = route.params.item;
+  const [desc, setDesc] = useState('');
+  const [link, setLink] = useState('');
+
+  const data = route.params.newsInfo;
+
+  useEffect(() => {
+    // navigation.setOptions({
+    //   title: route.params.title
+    // })
+    const sliceStr = data.news_desc.split('http')
+    setLink(`http${sliceStr.pop()}`);
+    setDesc(sliceStr)
+   
+
+  }, [])
 
   return (
-    <View style={{backgroundColor: '#FFF1C5', flex: 1}}>
+    <View style={{backgroundColor: '#FFF1C5', flex: 1, paddingTop: 50}}>
       <SafeAreaView style={styles.modal}>
         <ScrollView>
           <View>
@@ -23,19 +37,26 @@ const InfoNews = ({route}) => {
 
           <View style={styles.mainContent}>
             <Text adjustsFontSizeToFit={true} style={styles.textDescription}>
-              {data.news_desc}
+              {desc}
             </Text>
-            <Image
-              style={{
-                width: '100%',
-                height: 250,
-                resizeMode: 'stretch',
-                borderRadius: 24,
-                marginTop: 20,
-              }}
-              source={{uri: data.news_img}}
-              key={data.id}
-            />
+
+            <TouchableOpacity onPress={() => Linking.openURL(link)}   >
+              <Text style={styles.linkNews}>
+                {link}
+              </Text>
+            </TouchableOpacity>
+
+              <Image
+                style={{
+                  width: '100%',
+                  height: 400,
+                  resizeMode: 'cover',
+                  borderRadius: 24,
+                  marginTop: 20,
+                }}
+                source={{uri: data.news_img}}
+                key={data.id}
+              />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -75,6 +96,11 @@ const styles = StyleSheet.create({
   textDescription: {
     fontSize: 20,
     lineHeight: 22,
+  },
+  linkNews: {
+    fontSize: 20,
+    color: 'blue',
+    marginTop: 10,
   }
 })
 

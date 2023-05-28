@@ -23,6 +23,9 @@ import VideoGame from "./components/Tasks/VideoGame/VideoGame";
 import MemoryCard from "./components/Tasks/MemoryCard/MemoryCard";
 
 import MoscowMap from './FoldersScripts/MoscowMap';
+import NewsLentaPage from "./pages/NewsLentaPage";
+import NewsLenta from "./News/NewsLenta";
+import InfoNews from "./News/infoNews";
 
 
 const Stack = createNativeStackNavigator();
@@ -62,13 +65,12 @@ export default function Navigate() {
             <MaterialCommunityIcons name="google-maps" color='black' size={25}/>
           )
         }}/>
-        <Tab.Screen name="NewsLenta" component={EmptyPage} options={{
+        <Tab.Screen name="NewsLenta" component={NewsLenta} options={{
           title: 'Лента',
           tabBarIcon: () => (
             <Entypo name="news" color='black' size={25}/>
           )
         }}/>
-        
       </Tab.Navigator>
     )
   }
@@ -84,6 +86,10 @@ export default function Navigate() {
                 <Stack.Screen name='Home' component={Home}/>
                 <Stack.Screen name='Profile' component={Profile} options={{
                   headerShown: true
+                }}/>
+                <Stack.Screen name='InfoNews' component={InfoNews} options={{
+                  // headerShown: true,
+                  // title: 'Новость'
                 }}/>
                 <Stack.Screen name="Quiz" component={Quiz} options={{title : 'Викторина'}}/>
                 <Stack.Screen name="VideoGame" component={VideoGame} options={{title : 'Вспомни фразу'}}/>
