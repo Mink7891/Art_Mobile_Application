@@ -46,9 +46,14 @@ const VideoCourses = () => {
     Linking.openURL(url);
   };
 
-  const handleCategoryFilter = (category) => {
-    setSelectedCategory(category);
-  };
+
+const handleCategoryFilter = (category) => {
+    if (selectedCategory === category) {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(category);
+    }
+};
 
   const filteredVideos = selectedCategory
     ? videos.filter((video) => video.category === selectedCategory)
@@ -143,7 +148,6 @@ const styles = {
     backgroundColor: '#EEEEEE',
     justifyContent: 'center',
     marginRight: 2,
-    backgroundColor: '#FFFFFF',
     elevation: 5,
 
     
