@@ -5,6 +5,8 @@ import school from '../school.json';
 import InfoWindow from './InfoWindow';
 import Filter from './Filter';
 import * as Location from 'expo-location';
+import { processAddresses, geocodeAddress, getArea } from './getDistrictByAddress'
+
 
 
 const MoscowMap = () => {
@@ -20,6 +22,20 @@ const MoscowMap = () => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [isNearbyPressed, setIsNearbyPressed] = useState(false);
   const [originalMarkers, setOriginalMarkers] = useState([]);
+  const [areas, setAreas] = useState([]);
+  const [selectedAreas, setSelectedAreas] = useState([]);
+
+
+
+
+  useEffect(() => {
+    const fetchAreas = async () => {
+      const uniqueAreas = await processAddresses();
+      setAreas(uniqueAreas);
+    };
+
+    fetchAreas();
+  }, []);
 
 
   const handleRegionChangeComplete = (region) => {
@@ -45,7 +61,7 @@ const MoscowMap = () => {
 
   const handleMarkerPress = (marker) => {
     setSelectedMarker(marker);
-    const { latitude, longitude } = marker;
+    const { latitude, longitude } = marker || {};
     const newRegion = {
       latitude,
       longitude,
@@ -65,32 +81,14 @@ const MoscowMap = () => {
     setSelectedDistricts(filterType);
   };
 
+
   const handleDirectionFilter = (filterType) => {
     setSelectedDirections(filterType);
   };
-
-  const geocodeAddress = async (address) => {
-    try {
-      const response = await fetch(
-        `https://geocode-maps.yandex.ru/1.x/?format=json&geocode=${encodeURIComponent(
-          address
-        )}&apikey=b35f62ea-46d0-4e7d-b7aa-589390226795`
-      );
-      const data = await response.json();
-      const foundLocations = data.response.GeoObjectCollection.featureMember;
-
-      if (foundLocations.length > 0) {
-        const location = foundLocations[0].GeoObject.Point.pos.split(' ');
-        const latitude = parseFloat(location[1]);
-        const longitude = parseFloat(location[0]);
-        return { latitude, longitude };
-      }
-    } catch (error) {
-      console.error('Error geocoding address:', error);
-    }
-
-    return null;
-  };
+  const handleAreaFilter = (filterType) => {
+    setSelectedAreas(filterType);
+  };  
+  
 
   useEffect(() => {
     const fetchMarkers = async () => {
@@ -99,12 +97,15 @@ const MoscowMap = () => {
         const { address } = marker;
         const coordinates = await geocodeAddress(address);
         if (coordinates) {
-          updatedMarkers.push({ ...marker, latitude: coordinates.latitude, longitude: coordinates.longitude });
+          const latitude = coordinates.latitude;
+          const longitude = coordinates.longitude;
+          const area = await getArea(latitude, longitude, '3baa315089ed48d5b46b0f7e18c09074');
+          updatedMarkers.push({ ...marker, latitude, longitude, area });
         }
       }
       setMarkers(updatedMarkers);
     };
-
+  
     fetchMarkers();
 
     (async () => {
@@ -133,30 +134,40 @@ const MoscowMap = () => {
     setFilterButtonVisible(true);
     setFilterModalVisible(false);
   };
-
   const filteredMarkers =
-    selectedDirections.length > 0 || selectedDistricts.length > 0
-      ? markers.filter((marker) => {
-          const hasSelectedDirections =
-            selectedDirections.length === 0 ||
-            (marker.directions &&
-              selectedDirections.every((selectedDir) =>
-                marker.directions.some(
-                  (markerDir) =>
-                    markerDir &&
-                    markerDir.toLowerCase() === selectedDir.toLowerCase()
-                )
-              ));
-          const hasSelectedDistricts =
-            selectedDistricts.length === 0 ||
-            selectedDistricts.some(
-              (selectedDistrict) =>
-                marker.district &&
-                marker.district.toLowerCase() === selectedDistrict.toLowerCase()
-            );
-          return hasSelectedDirections && hasSelectedDistricts;
-        })
-      : markers;
+  selectedDirections.length > 0 ||
+  selectedDistricts.length > 0 ||
+  selectedAreas.length > 0
+    ? markers.filter((marker) => {
+        const hasSelectedDirections =
+          selectedDirections.length === 0 ||
+          (marker.directions &&
+            selectedDirections.every((selectedDir) =>
+              marker.directions.some(
+                (markerDir) =>
+                  markerDir &&
+                  markerDir.toLowerCase() === selectedDir.toLowerCase()
+              )
+            ));
+        const hasSelectedDistricts =
+          selectedDistricts.length === 0 ||
+          selectedDistricts.some(
+            (selectedDistrict) =>
+              marker.district &&
+              marker.district.toLowerCase() === selectedDistrict.toLowerCase()
+          );
+        const hasSelectedAreas =
+          selectedAreas.length === 0 ||
+          selectedAreas.some(
+            (selectedArea) =>
+              marker.area &&
+              marker.area.toLowerCase() === selectedArea.toLowerCase()
+          );
+        return hasSelectedDirections && hasSelectedDistricts && hasSelectedAreas;
+      })
+    : markers;
+
+  
 
       const isLocationInMoscow = (latitude, longitude) => {
         const moscowBounds = {
@@ -297,6 +308,8 @@ const MoscowMap = () => {
             onDirectionFilter={handleDirectionFilter}
             selectedDirections={selectedDirections}
             selectedDistricts={selectedDistricts}
+            onAreaFilter={handleAreaFilter}
+            selectedAreas={selectedAreas}
           />
           <TouchableOpacity
             style={styles.closeModalButton}
@@ -355,7 +368,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 8,
-    marginBottom: 16,
+    marginBottom: 50,
     alignSelf: 'center',
   },
   closeModalButtonText: {

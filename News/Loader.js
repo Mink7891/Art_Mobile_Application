@@ -4,7 +4,7 @@ const Loader = () => {
 
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.text}>Идет загрузка...</Text>
+      {/* <Text style={styles.text}>Идет загрузка...</Text> */}
       <ActivityIndicator style={styles.loader}/>
     </View>
   )

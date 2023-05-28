@@ -1,27 +1,30 @@
 import React from "react";
-import NewsLenta from "./News/NewsLenta";
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
-import Registration from "./Auth/Registration";
 import {useSelector} from "react-redux";
 
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
 import EmptyPage from "./pages/EmptyPage";
 import Profile from "./Auth/Profile";
+<<<<<<< HEAD
 import Tasks from "./pages/Tasks";
 import Quiz from "./components/Tasks/Quiz/Quiz";
 import VideoGame from "./components/Tasks/VideoGame/VideoGame";
 import MemoryCard from "./components/Tasks/MemoryCard/MemoryCard";
 
+=======
+import MoscowMap from './FoldersScripts/MoscowMap';
+>>>>>>> 334144574a535818268dec037bf46b6187d0b49e
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,10 +56,11 @@ export default function Navigate() {
             <AntDesign name="iconfontdesktop" color='black' size={25}/>
           )
         }}/>
-        <Tab.Screen name="MapsPage" component={EmptyPage} options={{
+        <Tab.Screen name="MapsPage" component={MoscowMap} options={{
           title: 'Карта',
+          unmountOnBlur: true,
           tabBarIcon: () => (
-            <FontAwesome5 name="tasks" color='black' size={25}/>
+            <MaterialCommunityIcons name="google-maps" color='black' size={25}/>
           )
         }}/>
         <Tab.Screen name="NewsLenta" component={EmptyPage} options={{

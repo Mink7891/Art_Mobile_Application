@@ -69,7 +69,7 @@ const Login = () => {
             <View style={{...styles.TextInputForm, marginBottom: 10}}>
               <TextInput
                 style={styles.TextInput}
-                placeholder="Login"
+                placeholder="Логин"
                 placeholderTextColor='white'
                 value={login}
                 onChangeText={(e) => setLogin(e)}
@@ -78,7 +78,7 @@ const Login = () => {
             <View style={styles.TextInputForm}>
               <TextInput
                 style={styles.TextInput}
-                placeholder="Password"
+                placeholder="Пароль"
                 placeholderTextColor='white'
                 value={password}
                 onChangeText={(e) => setPassword(e)}
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   content: {
     width: '100%',
-    height: '45%',
+    height: 300,
     borderRadius: 50,
     backgroundColor: 'rgba(0,0,0,0.45)'
   },
