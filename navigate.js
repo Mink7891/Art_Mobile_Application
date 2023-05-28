@@ -27,6 +27,7 @@ import NewsLentaPage from "./pages/NewsLentaPage";
 import NewsLenta from "./News/NewsLenta";
 import InfoNews from "./News/infoNews";
 
+import VideoCourses from "./pages/videoCourses";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -52,7 +53,7 @@ export default function Navigate() {
             <FontAwesome name="th-list" color='black' size={25}/>
           )
         }}/>
-        <Tab.Screen name="Course" component={EmptyPage} options={{
+        <Tab.Screen name="Course" component={VideoCourses} options={{
           title: 'Видеокурсы ',
           tabBarIcon: () => (
             <AntDesign name="iconfontdesktop" color='black' size={25}/>
