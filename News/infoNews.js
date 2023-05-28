@@ -29,7 +29,7 @@ const InfoNews = ({route, navigation}) => {
           <View style={styles.infoNews}>
             <Text style={styles.textInformationNews}>
               Дата: {data.news_date + '\n'}
-              Автор: {data.news_author}
+              Автор: {data.user_name + " " + data.user_surname}
             </Text>
           </View>
 
