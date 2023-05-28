@@ -17,6 +17,10 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
 import EmptyPage from "./pages/EmptyPage";
 import Profile from "./Auth/Profile";
+import Tasks from "./pages/Tasks";
+import Quiz from "./components/Tasks/Quiz/Quiz";
+import VideoGame from "./components/Tasks/VideoGame/VideoGame";
+import MemoryCard from "./components/Tasks/MemoryCard/MemoryCard";
 
 
 const Stack = createNativeStackNavigator();
@@ -31,7 +35,7 @@ export default function Navigate() {
       <Tab.Navigator screenOptions={{
         headerShown: false
       }}>
-        <Tab.Screen name="EmptyPage" component={EmptyPage} options={{
+        <Tab.Screen name="Tasks" component={Tasks} options={{
           title: 'Маршрут Заданий',
           tabBarIcon: () => (
             <FontAwesome5 name="tasks" color='black' size={25}/>
@@ -61,6 +65,7 @@ export default function Navigate() {
             <Entypo name="news" color='black' size={25}/>
           )
         }}/>
+        
       </Tab.Navigator>
     )
   }
@@ -77,12 +82,16 @@ export default function Navigate() {
                 <Stack.Screen name='Profile' component={Profile} options={{
                   headerShown: true
                 }}/>
+                <Stack.Screen name="Quiz" component={Quiz} options={{title : 'Викторина'}}/>
+                <Stack.Screen name="VideoGame" component={VideoGame} options={{title : 'Вспомни фразу'}}/>
+                <Stack.Screen name="MemoryCard" component={MemoryCard} options={{title : 'Карточки'}}/>
               </>
             )
             : (
               <>
                 <Stack.Screen name={'Login'} component={LoginPage}/>
                 <Stack.Screen name={'Registration'} component={RegistrationPage}/>
+                
               </>
             )
         }
