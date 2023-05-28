@@ -12,6 +12,7 @@ const CustomButton = ({onPress, title, sizeButton}) => {
 const styles = StyleSheet.create({
   button: {
     // width: '50%',
+    
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 12,

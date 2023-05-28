@@ -1,16 +1,16 @@
-import {StyleSheet, Button, SafeAreaView, Text, TextInput, View, Alert, TouchableOpacity} from "react-native";
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {clearErrorMessage, registrationUser, signupUser} from "../slice/authSlice";
+import { StyleSheet, Button, SafeAreaView, Text, TextInput, View, Alert, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrorMessage, registrationUser, signupUser } from "../slice/authSlice";
 import Loader from "../News/Loader";
 import CustomButton from "../components/CustomButton";
-import {useIsFocused, useNavigation} from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 
 const Registration = () => {
   const dispatch = useDispatch();
   const isFocus = useIsFocused();
   const navigation = useNavigation();
-  const {isFetching, isError, errorMessage} = useSelector(state => state.auth);
+  const { isFetching, isError, errorMessage } = useSelector(state => state.auth);
 
 
   const [name, setName] = useState('');
@@ -25,20 +25,20 @@ const Registration = () => {
 
   useEffect(() => {
     dispatch(clearErrorMessage())
-      if (isError && isFocus) {
-        const error = errorMessage[0]?.msg || errorMessage?.message;
-        Alert.alert(
-          'Возникла ошибка',
-          `${error}`,
-          [
-            {
-              text: 'Cancel',
-              style: 'cancel',
-            },
-          ],
-        );
-      }
-    }, [isFocus, errorMessage]
+    if (isError && isFocus) {
+      const error = errorMessage[0]?.msg || errorMessage?.message;
+      Alert.alert(
+        'Возникла ошибка',
+        `${error}`,
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+        ],
+      );
+    }
+  }, [isFocus, errorMessage]
   )
 
   const handlerRegistration = () => {
@@ -70,12 +70,12 @@ const Registration = () => {
   }
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
 
       {
         isFetching
           ? <View style={styles.loaderWrapper}>
-            <Loader/>
+            <Loader />
           </View>
           : null
       }
@@ -90,7 +90,7 @@ const Registration = () => {
           </View>
 
           <View style={styles.wrapperInput}>
-            <View style={{...styles.TextInputForm, marginBottom: 10}}>
+            <View style={{ ...styles.TextInputForm, marginBottom: 10 }}>
               <TextInput
                 style={styles.TextInput}
                 placeholder="Имя"
@@ -99,7 +99,7 @@ const Registration = () => {
                 onChangeText={(e) => setName(e)}
               />
             </View>
-            <View style={{...styles.TextInputForm, marginBottom: 10}}>
+            <View style={{ ...styles.TextInputForm, marginBottom: 10 }}>
               <TextInput
                 style={styles.TextInput}
                 placeholder="Фамилия"
@@ -108,7 +108,7 @@ const Registration = () => {
                 onChangeText={(e) => setSurname(e)}
               />
             </View>
-            <View style={{...styles.TextInputForm, marginBottom: 10}}>
+            <View style={{ ...styles.TextInputForm, marginBottom: 10 }}>
               <TextInput
                 style={styles.TextInput}
                 placeholder="Отчество"
@@ -117,7 +117,7 @@ const Registration = () => {
                 onChangeText={(e) => setLastName(e)}
               />
             </View>
-            <View style={{...styles.TextInputForm, marginBottom: 10}}>
+            <View style={{ ...styles.TextInputForm, marginBottom: 10 }}>
               <TextInput
                 style={styles.TextInput}
                 placeholder="Логин"
@@ -126,7 +126,7 @@ const Registration = () => {
                 onChangeText={(e) => setLogin(e)}
               />
             </View>
-            <View style={{...styles.TextInputForm, marginBottom: 10}}>
+            <View style={{ ...styles.TextInputForm, marginBottom: 10 }}>
               <TextInput
                 style={styles.TextInput}
                 placeholder="Пароль"
@@ -135,7 +135,7 @@ const Registration = () => {
                 onChangeText={(e) => setPassword(e)}
               />
             </View>
-            <View style={{...styles.TextInputForm, marginBottom: 10}}>
+            <View style={{ ...styles.TextInputForm, marginBottom: 10 }}>
               <TextInput
                 style={styles.TextInput}
                 placeholder="Электронная почта"
@@ -144,7 +144,7 @@ const Registration = () => {
                 onChangeText={(e) => setEmail(e)}
               />
             </View>
-            <View style={{...styles.TextInputForm, marginBottom: 10}}>
+            <View style={{ ...styles.TextInputForm, marginBottom: 10 }}>
               <TextInput
                 style={styles.TextInput}
                 placeholder="Номер телефона"
@@ -153,7 +153,7 @@ const Registration = () => {
                 onChangeText={(e) => setPhone(e)}
               />
             </View>
-            <View style={{...styles.TextInputForm, marginBottom: 10}}>
+            <View style={{ ...styles.TextInputForm, marginBottom: 10 }}>
               <TextInput
                 style={styles.TextInput}
                 placeholder="Возраст"
@@ -185,8 +185,8 @@ const Registration = () => {
               <Text style={styles.textRegInfo}>
                 Уже есть аккаунт?
               </Text>
-              <TouchableOpacity style={{borderBottomColor: 'white', borderBottomWidth: 1, marginLeft: 6}}
-                                onPress={() => navigation.navigate('Login')}>
+              <TouchableOpacity style={{ borderBottomColor: 'white', borderBottomWidth: 1, marginLeft: 6 }}
+                onPress={() => navigation.navigate('Login')}>
                 <Text style={styles.textRegInfo}>Войти</Text>
               </TouchableOpacity>
             </View>
@@ -220,9 +220,10 @@ const styles = StyleSheet.create({
   },
   content: {
     width: '100%',
-    height: 600,
+    height: 630,
     borderRadius: 50,
-    backgroundColor: 'rgba(0,0,0,0.45)'
+    backgroundColor: 'rgba(0,0,0,0.45)',
+    paddingBottom : 10
   },
   title: {
     alignItems: 'center',
@@ -254,8 +255,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wrapperButton: {
+    
     alignItems: 'center',
-    marginBottom: 10,
+    
   },
   regInfo: {
     flex: 1,
