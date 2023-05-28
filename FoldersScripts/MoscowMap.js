@@ -252,7 +252,7 @@ const MoscowMap = () => {
         }}
         onRegionChangeComplete={handleRegionChangeComplete}
         maxZoomLevel={16}
-        minZoomLevel={10}
+        minZoomLevel={2}
       >
         {location && (
           <Circle
