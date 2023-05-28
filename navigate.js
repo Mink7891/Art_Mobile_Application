@@ -16,15 +16,14 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
 import EmptyPage from "./pages/EmptyPage";
 import Profile from "./Auth/Profile";
-<<<<<<< HEAD
+
 import Tasks from "./pages/Tasks";
 import Quiz from "./components/Tasks/Quiz/Quiz";
 import VideoGame from "./components/Tasks/VideoGame/VideoGame";
 import MemoryCard from "./components/Tasks/MemoryCard/MemoryCard";
 
-=======
 import MoscowMap from './FoldersScripts/MoscowMap';
->>>>>>> 334144574a535818268dec037bf46b6187d0b49e
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

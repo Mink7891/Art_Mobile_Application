@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const API_URL = `https://demo-backend-s05i.onrender.com`;
+export const API_URL = `http://46.243.227.254:8080`;
 
 const $api = axios.create({
   withCredentials: true,

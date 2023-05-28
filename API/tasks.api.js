@@ -3,10 +3,10 @@ import axios from "axios";
 
 
 
-const API_URL = 'https://demo-backend-s05i.onrender.com/tasks/quiz';
-const ANSWER_QUIZ_URL = 'https://demo-backend-s05i.onrender.com/tasks/quiz'
+const API_URL = 'http://46.243.227.254:8080/tasks/quiz';
+const ANSWER_QUIZ_URL = 'http://46.243.227.254:8080/tasks/quiz'
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjg0NzU2NTg2LCJleHAiOjE2ODczNDg1ODZ9.mhQShaaLaWBtsUcl6Lb6IeygktNS5D4KYLX-MkR5P6k'
-const VIDEOS_TASK_URL = "https://demo-backend-s05i.onrender.com/tasks/videos"
+const VIDEOS_TASK_URL = "http://46.243.227.254:8080/tasks/videos"
 
 
 
