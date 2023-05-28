@@ -39,16 +39,21 @@ const videos = [
  
 ];
 
-const videoCourses = () => {
+const VideoCourses = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleVideoPress = (url) => {
     Linking.openURL(url);
   };
 
-  const handleCategoryFilter = (category) => {
-    setSelectedCategory(category);
-  };
+
+const handleCategoryFilter = (category) => {
+    if (selectedCategory === category) {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(category);
+    }
+};
 
   const filteredVideos = selectedCategory
     ? videos.filter((video) => video.category === selectedCategory)
@@ -143,7 +148,6 @@ const styles = {
     backgroundColor: '#EEEEEE',
     justifyContent: 'center',
     marginRight: 2,
-    backgroundColor: '#FFFFFF',
     elevation: 5,
 
     
@@ -218,4 +222,4 @@ const styles = {
   
 };
 
-export default videoCourses;
+export default VideoCourses;
