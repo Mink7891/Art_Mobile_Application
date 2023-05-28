@@ -16,9 +16,9 @@ export default function Tasks({navigation}) {
     <Layout>
         <View style={styles.container}>
             <View style={styles.containerChilds}>
-                <View style={styles.gameButton}><Button  title='Quiz' onPress={() => navigation.navigate('Quiz')}></Button></View>
-                <View style={styles.gameButton}><Button  title='Video Game' onPress={() => navigation.navigate('VideoGame')}></Button></View>
-                <View style={styles.gameButton}><Button  title='MemoryCard' onPress={() => navigation.navigate('MemoryCard')}></Button></View>
+                <View style={styles.gameButton}><Button  title='Викторина' onPress={() => navigation.navigate('Quiz')}></Button></View>
+                <View style={styles.gameButton}><Button  title='Вспомни мелодию' onPress={() => navigation.navigate('VideoGame')}></Button></View>
+                <View style={styles.gameButton}><Button  title='Карточки' onPress={() => navigation.navigate('MemoryCard')}></Button></View>
             </View>
         </View>
     </Layout>

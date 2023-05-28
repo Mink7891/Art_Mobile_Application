@@ -113,7 +113,7 @@ export default function VideoGame() {
 
 
     return (
-        <ImageBackground resizeMode="cover" style={styles.backgroundImage} source={require('../../../assets/patternBackground.png')}>
+        <ImageBackground resizeMode="cover" style={styles.backgroundImage} source={require('../../../assets/videoGameBG.png')}>
             
             <View style={styles.taskContainer}>
                 {loadingVideo ? <Text>Загрузка...</Text> :  step != videoList.length ? ( 

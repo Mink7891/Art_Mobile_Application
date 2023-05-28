@@ -79,7 +79,7 @@ export default function Quiz() {
 
 
     <ImageBackground
-    source={require('../../../assets/patternBackground.png')} 
+    source={require('../../../assets/QuizBG.png')} 
     style={styles.imageBackground}
     resizeMode="cover"
   >

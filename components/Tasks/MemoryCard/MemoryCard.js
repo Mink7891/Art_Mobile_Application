@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Text, Button } from 'react-native'
+import { View, StyleSheet, Text, Button , ImageBackground} from 'react-native'
 import MyFlipCard from './MyFlipCard'
 
 export default function MemoryCard() {
@@ -36,7 +36,7 @@ export default function MemoryCard() {
 
 
     const restart = () => {
-    
+
         setScore(0)
         setTurns(0)
         setGameOver(false)
@@ -91,7 +91,7 @@ export default function MemoryCard() {
         }
     }, [oneChoice, twoChoice])
 
-   
+
 
 
     const resetTurn = () => {
@@ -102,8 +102,11 @@ export default function MemoryCard() {
     }
 
     return (
-        <>
-            {gameOver && 
+        <ImageBackground
+            source={require('../../../assets/memoryCardBG.png')}
+            style={styles.imageBackground}
+            resizeMode="cover">
+            {gameOver &&
                 <View style={styles.gameOverContainer}>
                     <View style={styles.gameOver}>
                         <Text style={styles.gameOverText}>Ты выйграл</Text>
@@ -112,7 +115,7 @@ export default function MemoryCard() {
                     </View>
                 </View>}
             <View style={styles.container}>
-                
+
                 <View style={styles.cardsContainer}>
                     {!isLoading ? cards.map((card) =>
                         <MyFlipCard
@@ -129,7 +132,7 @@ export default function MemoryCard() {
 
                 </View>
             </View>
-        </>
+        </ImageBackground>
     )
 }
 
@@ -145,6 +148,11 @@ const styles = StyleSheet.create({
 
     },
 
+    imageBackground: {
+        width : '100%',
+        height : '100%'
+      },
+
     cardsContainer: {
         gap: 5,
         position: 'relative',
@@ -155,51 +163,51 @@ const styles = StyleSheet.create({
     },
 
 
-    gameOverContainer : {
-        display : 'flex',
-        alignItems : 'center',
-        justifyContent : 'center',
-        width : '100%',
-        height : '100%',
-        backgroundColor : 'rgba(0,0,0,0.9)',
-        zIndex : 10,
-        position : 'absolute',
-        top : 0,
-        opacity : 1,
+    gameOverContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0,0,0,0.9)',
+        zIndex: 10,
+        position: 'absolute',
+        top: 0,
+        opacity: 1,
 
 
 
     },
 
 
-    gameOverText : {
-        fontFamily : 'CalibriBold',
-        marginBottom : 10,
-        textAlign : 'center',
-        fontSize : 20
+    gameOverText: {
+        fontFamily: 'CalibriBold',
+        marginBottom: 10,
+        textAlign: 'center',
+        fontSize: 20
     },
 
 
-    gameOverBtn : {
-        textAlign : 'center',
-        alignItems : 'center',
-        
-        
+    gameOverBtn: {
+        textAlign: 'center',
+        alignItems: 'center',
+
+
     },
 
 
     gameOver: {
-        padding : 25,
-        width : '100%',
-        backgroundColor : '#fff',
-        alignItems : 'center',
-        textAlign : 'center'
+        padding: 25,
+        width: '100%',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        textAlign: 'center'
     },
 
 
-    turns : {
-        fontFamily : 'CalibriBold',
-        marginBottom : 8
+    turns: {
+        fontFamily: 'CalibriBold',
+        marginBottom: 8
 
     }
 })
