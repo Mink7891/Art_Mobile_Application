@@ -1,21 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {Image, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
-const InfoNews = ({route}) => {
+const InfoNews = ({route, navigation}) => {
   const [desc, setDesc] = useState('');
   const [link, setLink] = useState('');
 
   const data = route.params.newsInfo;
 
   useEffect(() => {
-    // navigation.setOptions({
-    //   title: route.params.title
-    // })
     const sliceStr = data.news_desc.split('http')
     setLink(`http${sliceStr.pop()}`);
     setDesc(sliceStr)
-   
-
   }, [])
 
   return (

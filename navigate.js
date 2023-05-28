@@ -7,7 +7,6 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-
 import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
 import {useSelector} from "react-redux";
@@ -65,7 +64,7 @@ export default function Navigate() {
             <MaterialCommunityIcons name="google-maps" color='black' size={25}/>
           )
         }}/>
-        <Tab.Screen name="NewsLenta" component={NewsLenta} options={{
+        <Tab.Screen name="NewsLenta" component={NewsLentaPage} options={{
           title: 'Лента',
           tabBarIcon: () => (
             <Entypo name="news" color='black' size={25}/>
@@ -87,10 +86,7 @@ export default function Navigate() {
                 <Stack.Screen name='Profile' component={Profile} options={{
                   headerShown: true
                 }}/>
-                <Stack.Screen name='InfoNews' component={InfoNews} options={{
-                  // headerShown: true,
-                  // title: 'Новость'
-                }}/>
+                <Stack.Screen name='InfoNews' component={InfoNews}/>
                 <Stack.Screen name="Quiz" component={Quiz} options={{title : 'Викторина'}}/>
                 <Stack.Screen name="VideoGame" component={VideoGame} options={{title : 'Вспомни фразу'}}/>
                 <Stack.Screen name="MemoryCard" component={MemoryCard} options={{title : 'Карточки'}}/>

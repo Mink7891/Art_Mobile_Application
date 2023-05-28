@@ -6,15 +6,12 @@ import {
   Image,
   FlatList,
   SafeAreaView,
-  TouchableOpacity, ActivityIndicator, Button
+  TouchableOpacity, ActivityIndicator
 
 } from "react-native";
 import React, {useEffect, useState} from "react";
-import Loader from "./Loader";
 import {useNavigation} from "@react-navigation/native";
 import $api from "../http";
-import Header from "../components/Header";
-import axios from "axios";
 
 const screenDimensions = Dimensions.get('screen');
 
@@ -29,7 +26,7 @@ const News = () => {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://46.243.227.254:8080/news/${page}`)
+      const response = await $api.get(`/news/${page}`);
       setNews(news.concat(response.data));
     } catch (error) {
       setError(error.message)
@@ -46,23 +43,18 @@ const News = () => {
     setPage(page + 1)
   }
 
-
-  console.log(news?.length);
-
   const ListEndLoader = () => {
     if (isLoading) {
-      return <ActivityIndicator size={'large'} />;
+      return <ActivityIndicator size={'large'}/>;
     }
   };
 
-
   return (
     <SafeAreaView style={stylesMain.wrapper}>
-      <Header/>
       <View>
         {
           error
-          ? <Text style={{fontSize: 24, color: 'red'}}>
+            ? <Text style={{fontSize: 24, color: 'red'}}>
               {error}
             </Text>
             : null
@@ -70,9 +62,6 @@ const News = () => {
         <FlatList
           data={news}
           showDefaultLoadingIndicators={true}
-          style={{
-            marginBottom: 60
-          }}
           renderItem={({item}) => (
             <TouchableOpacity onPress={() => {
               navigation.navigate('InfoNews', {
@@ -134,19 +123,6 @@ const stylesMain = StyleSheet.create({
   }
 })
 
-
-// const boxShadow = Platform.select({
-//   ios: {
-//     shadowColor: '#000',
-//     shadowOffset: {
-//       width: 0,
-//       height: 0,
-//     },
-//     shadowOpacity: 0.4,
-//     shadowRadius: 4,
-//   },
-//   android: {elevation: 6},
-// });
 
 const styles = StyleSheet.create({
   container: {
