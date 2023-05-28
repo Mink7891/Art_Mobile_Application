@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
 
 
   answerContainer : {
+    fontFamily : 'Calibri',
     margin : 10,
     marginBottom : 20
   }

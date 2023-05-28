@@ -26,7 +26,7 @@ import NewsLentaPage from "./pages/NewsLentaPage";
 import NewsLenta from "./News/NewsLenta";
 import InfoNews from "./News/infoNews";
 
-import VideoCourses from "./pages/videoCourses";
+import VideoCourses from "./pages/VideoCourses";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

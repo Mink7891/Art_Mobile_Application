@@ -39,7 +39,7 @@ const videos = [
  
 ];
 
-const videoCourses = () => {
+const VideoCourses = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleVideoPress = (url) => {
@@ -218,4 +218,4 @@ const styles = {
   
 };
 
-export default videoCourses;
+export default VideoCourses;

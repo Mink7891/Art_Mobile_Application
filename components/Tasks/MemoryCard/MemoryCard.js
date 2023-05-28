@@ -14,12 +14,12 @@ export default function MemoryCard() {
     const [gameOver, setGameOver] = useState(false)
 
     const memoryCards = [
-        { "num": 0, "img": "https://i.pinimg.com/564x/18/7a/88/187a88cd5839db1862198ec1cbc2fce4.jpg", "isMatch": false },
-        { "num": 1, "img": "https://i.pinimg.com/564x/c3/1d/8d/c31d8de5248b8d835dc3cb2a439500b5.jpg", "isMatch": false },
-        { "num": 2, "img": "https://i.pinimg.com/564x/39/f2/91/39f2916eb18f8a7b67ca50b893db27cd.jpg", "isMatch": false },
-        { "num": 3, "img": "https://i.pinimg.com/564x/3b/1f/a4/3b1fa424908ffbd8eca8341962d7857b.jpg", "isMatch": false },
-        { "num": 4, "img": "https://i.pinimg.com/564x/06/2e/d3/062ed359fca4cae1d657a1edc1a96b25.jpg", "isMatch": false },
-        { "num": 5, "img": "https://i.pinimg.com/564x/92/2e/7a/922e7abad66613748a0c2a67fa372e32.jpg", "isMatch": false },
+        { "num": 0, "img": "https://i.pinimg.com/564x/d6/44/da/d644daec86ffb501d082dc83160a1bab.jpg", "isMatch": false },
+        { "num": 1, "img": "https://i.pinimg.com/564x/77/24/9e/77249e3fdc8ad318be76fdfb910bad7e.jpg", "isMatch": false },
+        { "num": 2, "img": "https://i.pinimg.com/736x/39/59/81/3959811dc0d8478f584f3221cfbf47a6.jpg", "isMatch": false },
+        { "num": 3, "img": "https://i.pinimg.com/736x/29/76/ca/2976ca34de3f9a8e386d249bf12fed00.jpg", "isMatch": false },
+        { "num": 4, "img": "https://i.pinimg.com/564x/ae/54/22/ae54220a2757ba52a3b7fd8092c2041a.jpg", "isMatch": false },
+        { "num": 5, "img": "https://i.pinimg.com/564x/16/1b/8c/161b8c43e03cbb413217510a6930ccc4.jpg", "isMatch": false },
 
     ]
 
@@ -117,9 +117,9 @@ export default function MemoryCard() {
             <View style={styles.container}>
 
                 <View style={styles.cardsContainer}>
-                    {!isLoading ? cards.map((card) =>
+                    {!isLoading ? cards.map((card,index) =>
                         <MyFlipCard
-                            key={card.id}
+                            key={index}
                             handleChoise={handleChoise}
                             card={card}
                             flipped={card === oneChoice || card === twoChoice || card.isMatch}
