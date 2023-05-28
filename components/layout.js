@@ -1,7 +1,7 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, Dimensions} from "react-native";
 
-const d = Dimensions.get("screen")
+const d = Dimensions.get("screen");
 
 const Layout = ({children}) => {
   return (

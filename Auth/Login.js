@@ -5,7 +5,6 @@ import {clearErrorMessage, signupUser} from "../slice/authSlice";
 import Loader from "../News/Loader";
 import CustomButton from "../components/CustomButton";
 import {useNavigation, useIsFocused} from "@react-navigation/native";
-import * as SecureStore from "expo-secure-store";
 
 
 const Login = () => {
@@ -163,6 +162,8 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
+    justifyContent: 'center',
+    flex: 1,
     zIndex: 10,
     backgroundColor: 'black',
     opacity: 0.5,

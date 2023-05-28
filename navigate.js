@@ -25,6 +25,7 @@ import MoscowMap from './FoldersScripts/MoscowMap';
 import NewsLentaPage from "./pages/NewsLentaPage";
 import NewsLenta from "./News/NewsLenta";
 import InfoNews from "./News/infoNews";
+import RatingPage from "./pages/RatingPage";
 
 import VideoCourses from "./pages/VideoCourses";
 
@@ -46,7 +47,7 @@ export default function Navigate() {
             <FontAwesome5 name="tasks" color='black' size={25}/>
           )
         }}/>
-        <Tab.Screen name="RatingUser" component={EmptyPage} options={{
+        <Tab.Screen name="RatingUser" component={RatingPage} options={{
           title: 'Соревнования ',
           tabBarIcon: () => (
             <FontAwesome name="th-list" color='black' size={25}/>

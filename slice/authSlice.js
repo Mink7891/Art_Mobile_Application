@@ -21,7 +21,12 @@ export const signupUser = createAsyncThunk(
         "accessToken": response.data.token
       });
     } catch (error) {
-      return thunkAPI.rejectWithValue({"message": error.response.data.message, "status": error.response.status});
+      console.log('It is error');
+      if (error?.response?.data?.message) {
+        return thunkAPI.rejectWithValue({"message": error.response.data.message, "status": error.response.status});
+      } else {
+        return thunkAPI.rejectWithValue({"message": "Произошла непредвиденная ошибка. Повторите попытку позже."});
+      }
     }
   }
 )
