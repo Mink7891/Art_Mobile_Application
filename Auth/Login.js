@@ -40,14 +40,14 @@ const Login = () => {
       .then(async (res) => {
         if (res.payload?.status === 200) {
           // await SecureStore.setItemAsync('token', res.payload?.accessToken);
-          navigation.navigate('EmptyPage')
+          navigation.navigate('Course')
         }
       })
   }
 
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.container}>
 
       {
         isFetching
@@ -115,14 +115,19 @@ const Login = () => {
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    flexDirection: 'column',
-    marginTop: 70,
+
+  container : {
+    flex : 1,
+    justifyContent : 'center',
+    width : '100%',
+    height : '100%'
   },
+
+  
   content: {
+    
     width: '100%',
+    justifyContent : 'center',
     height: 300,
     borderRadius: 50,
     backgroundColor: 'rgba(0,0,0,0.45)'
@@ -158,7 +163,7 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    zIndex: 5,
+    zIndex: 10,
     backgroundColor: 'black',
     opacity: 0.5,
     width: '100%',
