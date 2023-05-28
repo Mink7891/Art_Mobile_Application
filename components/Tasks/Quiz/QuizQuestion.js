@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 
     question : {
        textAlign : 'center',
-       fontFamily : 'CalibriBold',
+       fontFamily : 'Calibri',
        fontSize : 20
     },
 
@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
         borderRadius : 20
     },
     answers_text : {
-        fontFamily : 'CalibriBold'
+        fontFamily : 'Calibri'
     }
 });

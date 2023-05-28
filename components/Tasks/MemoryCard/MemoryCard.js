@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
 
 
     gameOverText: {
-        fontFamily: 'CalibriBold',
+        fontFamily: 'Calibri',
         marginBottom: 10,
         textAlign: 'center',
         fontSize: 20
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
 
 
     turns: {
-        fontFamily: 'CalibriBold',
+        fontFamily: 'Calibri',
         marginBottom: 8
 
     }

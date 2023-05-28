@@ -45,6 +45,6 @@ const styles = StyleSheet.create({
 
 
     buttonText : {
-        fontFamily : 'CalibriBold'
+        fontFamily : 'Calibri'
     }
 })

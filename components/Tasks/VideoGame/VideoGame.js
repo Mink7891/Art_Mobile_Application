@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
 
 
     praises: {
-        fontFamily: "CalibriBold",
+        fontFamily: "Calibri",
         fontSize: 25,
         marginBottom: 15
     },
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     },
 
     answer: {
-        fontFamily: "CalibriBold"
+        fontFamily: "Calibri"
     },
 
     backgroundImage: {
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         top: '50%',
-        fontFamily: 'CalibriBold',
+        fontFamily: 'Calibri',
         fontSize: 25,
 
     },
