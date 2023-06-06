@@ -4,11 +4,10 @@ import * as ImagePicker from 'expo-image-picker';
 
 
 const AddNews = ({route}) => {
+  const news_auth = route.params?.auth_id;
   const [newsTitle, setNewsTitle] = useState('');
-  const [newsDesc, setNewsDesc] = useState('' +
-    'fdslfkjdsflkjsdfklsdjflkdsjflsdkfjdklsfjsdlkfjdslkfjsdlkfjdsklfjsdklfjslfjdslkfjsdlfjsdkflsdjkflsdjfklsdjfldksjfdlsfjsdlkfjdslfjsdlfjsklfjsdklfjsdlkfskj');
-  const [newsImg, setNewsImg] = useState(null);
-  const [newsAuth, setNewsAuth] = useState(route.params?.auth_id);
+  const [newsDesc, setNewsDesc] = useState('');
+  const [newsImg, setNewsImg] = useState();
   const [newsDate, setNewsDate] = useState(
     new Date().toLocaleString()
   ); // auto current data
@@ -71,10 +70,28 @@ const AddNews = ({route}) => {
 
 
         <View>
-          <Image style={{
-            width: 250,
-            height: 200
-          }} source={{uri: newsImg}}/>
+          {
+            newsImg
+              ? <Image style={{
+                width: 250,
+                height: 200
+              }} source={{uri: newsImg}}/>
+              : <View style={{
+                width: 250,
+                height: 200,
+                borderWidth: 1,
+                borderColor: 'black',
+                justifyContent: 'center'
+              }}>
+                <Text style={{
+                  textAlign: 'center',
+                  fontSize: 20,
+                  fontWeight: 500
+                }}>Тут будет ваша фотография!</Text>
+              </View>
+          }
+
+
           <TouchableOpacity onPress={selectImage} style={{marginTop: 20}}>
             <Text style={{
               fontSize: 20,
