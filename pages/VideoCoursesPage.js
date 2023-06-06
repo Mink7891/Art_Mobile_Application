@@ -1,15 +1,15 @@
 import React from 'react';
 import Layout from "../components/layout";
 import Header from "../components/Header";
-import RatingTable from "../components/ratingTable/RatingTable";
+import VideoCourses from "./VideoCourses";
 
-const RatingPage = () => {
+const VideoCoursesPage = () => {
   return (
     <Layout>
       <Header/>
-      <RatingTable/>
+      <VideoCourses/>
     </Layout>
   );
 };
 
-export default RatingPage;
+export default VideoCoursesPage;

@@ -1,9 +1,9 @@
 import { StyleSheet, Button, SafeAreaView, Text, TextInput, View, Alert, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrorMessage, registrationUser, signupUser } from "../slice/authSlice";
-import Loader from "../News/Loader";
-import CustomButton from "../components/CustomButton";
+import { clearErrorMessage, registrationUser, signupUser } from "../../store/slice/authSlice";
+import Loader from "../../News/Loader";
+import CustomButton from "../CustomButton";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 
 const Registration = () => {

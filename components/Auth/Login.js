@@ -1,9 +1,9 @@
 import {StyleSheet, View, TextInput, SafeAreaView, Text, Alert, Button, TouchableOpacity} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {clearErrorMessage, signupUser} from "../slice/authSlice";
-import Loader from "../News/Loader";
-import CustomButton from "../components/CustomButton";
+import {clearErrorMessage, signupUser} from "../../store/slice/authSlice";
+import Loader from "../../News/Loader";
+import CustomButton from "../CustomButton";
 import {useNavigation, useIsFocused} from "@react-navigation/native";
 
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import school from '../school.json'
+import school from '../../school.json'
 
 async function getArea(latitude, longitude, api_key) {
   const url = 'https://api.opencagedata.com/geocode/v1/json';

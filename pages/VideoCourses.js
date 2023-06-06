@@ -1,7 +1,5 @@
-
-import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, Text, Linking, ImageBackground} from 'react-native';
-import Header from "../components/Header";
+import React, {useState} from 'react';
+import {StyleSheet, View, Image, TouchableOpacity, Text, Linking, ImageBackground} from 'react-native';
 
 const videos = [
   {
@@ -36,7 +34,7 @@ const videos = [
     image: require('../assets/guitar.jpg'),
     url: 'https://youtu.be/GjVuiUoU9bw',
   },
- 
+
 ];
 
 const VideoCourses = () => {
@@ -47,83 +45,83 @@ const VideoCourses = () => {
   };
 
 
-const handleCategoryFilter = (category) => {
+  const handleCategoryFilter = (category) => {
     if (selectedCategory === category) {
       setSelectedCategory(null);
     } else {
       setSelectedCategory(category);
     }
-};
+  };
 
   const filteredVideos = selectedCategory
     ? videos.filter((video) => video.category === selectedCategory)
-    : videos; 
+    : videos;
 
   return (
-    
+
     <View style={styles.container}>
-    <Header/>
-    <ImageBackground source={require('../assets/pattern22.png')}style={styles.backgroundImage}>
-      <View style={styles.filterContainer}>
-        
-        <TouchableOpacity
-          style={[styles.filterButton, selectedCategory === 'Хореография' && styles.activeFilterButton]}
-          onPress={() => handleCategoryFilter('Хореография')}
-        >
-          <Text style={[styles.filterButtonText, selectedCategory === 'Хореография' && styles.activeFilterButtonText]}>
-            Хореография
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.filterButton, selectedCategory === 'Гитара' && styles.activeFilterButton]}
-          onPress={() => handleCategoryFilter('Гитара')}
-        >
-          <Text style={[styles.filterButtonText, selectedCategory === 'Гитара' && styles.activeFilterButtonText]}>
-            Гитара
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.filterButton, selectedCategory === 'Пианино' && styles.activeFilterButton]}
-          onPress={() => handleCategoryFilter('Пианино')}
-        >
-          <Text style={[styles.filterButtonText, selectedCategory === 'Пианино' && styles.activeFilterButtonText]}>
-            Пианино
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.filterButton, selectedCategory === 'Скрипка' && styles.activeFilterButton]}
-          onPress={() => handleCategoryFilter('Скрипка')}
-        >
-          <Text style={[styles.filterButtonText, selectedCategory === 'Скрипка' && styles.activeFilterButtonText]}>
-            Скрипка
-          </Text>
-        </TouchableOpacity>
-          
-      </View>
-    
-      <View style={styles.videoContainer}>
-        {filteredVideos.map((video) => (
+      <ImageBackground source={require('../assets/pattern22.png')} style={styles.backgroundImage}>
+        <View style={styles.filterContainer}>
+
           <TouchableOpacity
-            key={video.id}
-            style={styles.card}
-            onPress={() => handleVideoPress(video.url)}
+            style={[styles.filterButton, selectedCategory === 'Хореография' && styles.activeFilterButton]}
+            onPress={() => handleCategoryFilter('Хореография')}
           >
-            <Image source={video.image} style={styles.image} />
-            <View style={styles.overlay}>
-              <Text style={styles.title}>{video.title}</Text>
-              <Text style={styles.description}>{video.description}</Text>
-            </View>
+            <Text
+              style={[styles.filterButtonText, selectedCategory === 'Хореография' && styles.activeFilterButtonText]}>
+              Хореография
+            </Text>
           </TouchableOpacity>
-        ))}
-      </View>
-    
-       </ImageBackground>
+          <TouchableOpacity
+            style={[styles.filterButton, selectedCategory === 'Гитара' && styles.activeFilterButton]}
+            onPress={() => handleCategoryFilter('Гитара')}
+          >
+            <Text style={[styles.filterButtonText, selectedCategory === 'Гитара' && styles.activeFilterButtonText]}>
+              Гитара
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.filterButton, selectedCategory === 'Пианино' && styles.activeFilterButton]}
+            onPress={() => handleCategoryFilter('Пианино')}
+          >
+            <Text style={[styles.filterButtonText, selectedCategory === 'Пианино' && styles.activeFilterButtonText]}>
+              Пианино
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.filterButton, selectedCategory === 'Скрипка' && styles.activeFilterButton]}
+            onPress={() => handleCategoryFilter('Скрипка')}
+          >
+            <Text style={[styles.filterButtonText, selectedCategory === 'Скрипка' && styles.activeFilterButtonText]}>
+              Скрипка
+            </Text>
+          </TouchableOpacity>
+
+        </View>
+
+        <View style={styles.videoContainer}>
+          {filteredVideos.map((video) => (
+            <TouchableOpacity
+              key={video.id}
+              style={styles.card}
+              onPress={() => handleVideoPress(video.url)}
+            >
+              <Image source={video.image} style={styles.image}/>
+              <View style={styles.overlay}>
+                <Text style={styles.title}>{video.title}</Text>
+                <Text style={styles.description}>{video.description}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+      </ImageBackground>
     </View>
-    
+
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F6F6F6',
@@ -150,13 +148,13 @@ const styles = {
     marginRight: 2,
     elevation: 5,
 
-    
+
   },
   activeFilterButton: {
     backgroundColor: '#007AFF',
   },
   filterButtonText: {
-    
+
     fontSize: 12,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -175,7 +173,7 @@ const styles = {
     alignItems: 'center',
     paddingTop: 10,
     paddingHorizontal: 10,
-    
+
   },
   card: {
     width: 150,
@@ -184,7 +182,7 @@ const styles = {
     borderRadius: 10,
     backgroundColor: '#FFFFFF',
     elevation: 1,
-    
+
   },
   image: {
     width: '100%',
@@ -211,15 +209,14 @@ const styles = {
     color: '#FFFFFF',
     fontSize: 12,
   },
-  
-    backgroundImage:{
-        flex: 1,
-        resizeMode: 'cover',
-        justifyContent: 'center',
-        
-        
-    },
-  
-};
+
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+
+
+  },
+});
 
 export default VideoCourses;

@@ -13,21 +13,18 @@ import {useSelector} from "react-redux";
 
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
-import EmptyPage from "./pages/EmptyPage";
-import Profile from "./Auth/Profile";
-
+import ProfilePage from "./pages/ProfilePage";
 import Tasks from "./pages/Tasks";
 import Quiz from "./components/Tasks/Quiz/Quiz";
 import VideoGame from "./components/Tasks/VideoGame/VideoGame";
 import MemoryCard from "./components/Tasks/MemoryCard/MemoryCard";
 
-import MoscowMap from './FoldersScripts/MoscowMap';
+import MoscowMap from './components/FoldersScripts/MoscowMap';
 import NewsLentaPage from "./pages/NewsLentaPage";
-import NewsLenta from "./News/NewsLenta";
 import InfoNews from "./News/infoNews";
 import RatingPage from "./pages/RatingPage";
 
-import VideoCourses from "./pages/videoCourses";
+import VideoCoursesPage from "./pages/VideoCoursesPage";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,7 +50,7 @@ export default function Navigate() {
             <FontAwesome name="th-list" color='black' size={25}/>
           )
         }}/>
-        <Tab.Screen name="Course" component={VideoCourses} options={{
+        <Tab.Screen name="Course" component={VideoCoursesPage} options={{
           title: 'Видеокурсы ',
           tabBarIcon: () => (
             <AntDesign name="iconfontdesktop" color='black' size={25}/>
@@ -85,8 +82,9 @@ export default function Navigate() {
           isAuth ? (
               <>
                 <Stack.Screen name='Home' component={Home}/>
-                <Stack.Screen name='Profile' component={Profile} options={{
-                  headerShown: true
+                <Stack.Screen name='Profile' component={ProfilePage} options={{
+                  headerShown: true,
+                  title: 'Профиль'
                 }}/>
                 <Stack.Screen name='InfoNews' component={InfoNews}/>
                 <Stack.Screen name="Quiz" component={Quiz} options={{title : 'Викторина'}}/>

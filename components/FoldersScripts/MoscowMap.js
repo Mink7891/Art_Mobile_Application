@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Modal, TouchableOpacity } from 'react-native';
 import MapView, { Marker, Circle } from 'react-native-maps';
-import school from '../school.json';
+import school from '../../school.json';
 import InfoWindow from './InfoWindow';
 import Filter from './Filter';
 import * as Location from 'expo-location';

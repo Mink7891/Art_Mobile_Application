@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Dimensions, ScrollView } from 'react-native';
-import directions from '../direction.json'; // направление
-import districts from '../district.json'; // округ
+import directions from '../../direction.json'; // направление
+import districts from '../../district.json'; // округ
 import { processAddresses } from './getDistrictByAddress';
 
 const windowHeight = Dimensions.get('window').height;
