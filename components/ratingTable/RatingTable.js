@@ -5,7 +5,6 @@ import {StyleSheet, FlatList, Text, View, Dimensions} from "react-native";
 import Loader from "../../News/Loader";
 import {useSelector} from "react-redux";
 
-const d = Dimensions.get("screen");
 
 const RatingTable = () => {
   const isFocused = useIsFocused();

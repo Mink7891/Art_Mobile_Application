@@ -25,13 +25,16 @@ import InfoNews from "./News/infoNews";
 import RatingPage from "./pages/RatingPage";
 
 import VideoCoursesPage from "./pages/VideoCoursesPage";
+import AdminPanel from "./components/SchoolAdminPanel/AdminPanel";
+import AddNews from "./components/SchoolAdminPanel/AddNews";
+import AddVideoCourse from "./components/SchoolAdminPanel/AddVideoCourse";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
 export default function Navigate() {
-  const {isAuth} = useSelector((state) => state.auth);
+  const {userInfo, isAuth} = useSelector((state) => state.auth);
 
   const Home = () => {
     return (
@@ -82,21 +85,37 @@ export default function Navigate() {
           isAuth ? (
               <>
                 <Stack.Screen name='Home' component={Home}/>
-                <Stack.Screen name='Profile' component={ProfilePage} options={{
-                  headerShown: true,
-                  title: 'Профиль'
-                }}/>
+
+                {
+                  userInfo?.user_role === 1
+                    ? (<>
+                        <Stack.Screen name='Profile' component={AdminPanel}/>
+                        <Stack.Screen name='AddNews' component={AddNews} options={{
+                          headerShown: true,
+                          title: 'Добавление новости'
+                        }}/>
+                        <Stack.Screen name='AddVideoCourse' component={AddVideoCourse} options={{
+                          headerShown: true,
+                          title: 'Добавление видео курса'
+                        }}/>
+                      </>
+                    )
+                    : (<Stack.Screen name='Profile' component={ProfilePage} options={{
+                      headerShown: true,
+                      title: 'Профиль'
+                    }}/>)
+                }
                 <Stack.Screen name='InfoNews' component={InfoNews}/>
-                <Stack.Screen name="Quiz" component={Quiz} options={{title : 'Викторина'}}/>
-                <Stack.Screen name="VideoGame" component={VideoGame} options={{title : 'Вспомни фразу'}}/>
-                <Stack.Screen name="MemoryCard" component={MemoryCard} options={{title : 'Карточки'}}/>
+                <Stack.Screen name="Quiz" component={Quiz} options={{title: 'Викторина'}}/>
+                <Stack.Screen name="VideoGame" component={VideoGame} options={{title: 'Вспомни фразу'}}/>
+                <Stack.Screen name="MemoryCard" component={MemoryCard} options={{title: 'Карточки'}}/>
               </>
             )
             : (
               <>
                 <Stack.Screen name={'Login'} component={LoginPage}/>
                 <Stack.Screen name={'Registration'} component={RegistrationPage}/>
-                
+
               </>
             )
         }
