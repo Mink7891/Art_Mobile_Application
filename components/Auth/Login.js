@@ -1,10 +1,12 @@
-import {StyleSheet, View, TextInput, SafeAreaView, Text, Alert, Button, TouchableOpacity} from 'react-native'
+import {StyleSheet, View, TextInput, SafeAreaView, Text, Alert, Pressable, TouchableOpacity} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {clearErrorMessage, signupUser} from "../../store/slice/authSlice";
 import Loader from "../../News/Loader";
 import CustomButton from "../CustomButton";
 import {useNavigation, useIsFocused} from "@react-navigation/native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {useTogglePasswordVisibility} from "../../hooks/useTogglePasswordVisibility";
 
 
 const Login = () => {
@@ -13,6 +15,7 @@ const Login = () => {
   const isFocus = useIsFocused();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const {passwordVisibility, rightIcon, handlePasswordVisibility} = useTogglePasswordVisibility();
 
   const {isFetching, isError, errorMessage} = useSelector(state => state.auth);
 
@@ -74,15 +77,22 @@ const Login = () => {
                 onChangeText={(e) => setLogin(e)}
               />
             </View>
-            <View style={styles.TextInputForm}>
+            <View style={{...styles.TextInputForm, flexDirection: 'row', justifyContent: 'space-between'}}>
               <TextInput
                 style={styles.TextInput}
                 placeholder="Пароль"
+                autoCorrect={false}
                 placeholderTextColor='white'
                 value={password}
+                autoCapitalize="none"
+                textContentType="newPassword"
+                secureTextEntry={passwordVisibility}
+                enablesReturnKeyAutomatically
                 onChangeText={(e) => setPassword(e)}
-                secureTextEntry={true}
               />
+              <Pressable onPress={handlePasswordVisibility}>
+                <MaterialCommunityIcons name={rightIcon} size={22} color="white" />
+              </Pressable>
             </View>
           </View>
 
