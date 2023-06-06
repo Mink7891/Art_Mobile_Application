@@ -3,14 +3,8 @@ import {StyleSheet, View, Text, TextInput, TouchableOpacity, Image} from "react-
 import * as ImagePicker from 'expo-image-picker';
 
 
-// news_id
-// news_title
-// news_desc
-// news_img
-// news_author
-// news_date
-
 const AddNews = ({route}) => {
+  const [newsTitle, setNewsTitle] = useState('');
   const [newsDesc, setNewsDesc] = useState('' +
     'fdslfkjdsflkjsdfklsdjflkdsjflsdkfjdklsfjsdlkfjdslkfjsdlkfjdsklfjsdklfjslfjdslkfjsdlfjsdkflsdjkflsdjfklsdjfldksjfdlsfjsdlkfjdslfjsdlfjsklfjsdklfjsdlkfskj');
   const [newsImg, setNewsImg] = useState(null);
@@ -40,6 +34,24 @@ const AddNews = ({route}) => {
     <View style={styles.container}>
       <View style={styles.content}>
 
+
+        <View style={{...styles.TextInputForm, marginBottom: 10}}>
+          <Text style={{
+            fontSize: 20,
+            fontWeight: 500
+          }}>
+            Заголовок:
+          </Text>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Заголовок"
+            multiline={true}
+            placeholderTextColor='#B3C19F'
+            value={newsTitle}
+            onChangeText={(e) => setNewsTitle(e)}
+          />
+        </View>
+
         <View style={{...styles.TextInputForm, marginBottom: 10}}>
           <Text style={{
             fontSize: 20,
@@ -57,19 +69,27 @@ const AddNews = ({route}) => {
           />
         </View>
 
-        <TouchableOpacity onPress={selectImage} style={{marginTop: 20}}>
-          <Text style={{fontSize: 20, color: 'blue'}}>Загрузить изображение</Text>
-        </TouchableOpacity>
-  
-        <Image style={{
-          width: 250,
-          height: 200
-        }} source={{uri: newsImg}}/>
+
+        <View>
+          <Image style={{
+            width: 250,
+            height: 200
+          }} source={{uri: newsImg}}/>
+          <TouchableOpacity onPress={selectImage} style={{marginTop: 20}}>
+            <Text style={{
+              fontSize: 20,
+              color: 'blue',
+            }}>
+              Загрузить изображение
+            </Text>
+          </TouchableOpacity>
+        </View>
 
         <View style={{...styles.TextInputForm, marginBottom: 10}}>
           <Text style={{
             fontSize: 20,
-            fontWeight: 500
+            fontWeight: 500,
+            marginTop: 20
           }}>
             Дата:
           </Text>
