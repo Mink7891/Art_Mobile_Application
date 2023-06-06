@@ -3,11 +3,13 @@ import $api from "../../http";
 import {useIsFocused} from "@react-navigation/native";
 import {StyleSheet, FlatList, Text, View, Dimensions} from "react-native";
 import Loader from "../../News/Loader";
+import {useSelector} from "react-redux";
 
 const d = Dimensions.get("screen");
 
 const RatingTable = () => {
   const isFocused = useIsFocused();
+  const {userInfo} = useSelector((state) => state.auth);
   const [users, setUsers] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -24,7 +26,6 @@ const RatingTable = () => {
     }
   }
 
-  
 
   useEffect(() => {
     fetchRate();
@@ -111,9 +112,15 @@ const RatingTable = () => {
               </View>
 
               <View>
-                <Text style={styles.text}>
-                  {item?.user_name}
-                </Text>
+                {
+                  userInfo?.user_id === item?.user_id
+                    ? <Text style={{
+                      ...styles.text,
+                      color: 'rgb(32,220,5)',
+                      fontWeight: '450'
+                    }}>{`${item?.user_name} (Вы)`}</Text>
+                    : <Text style={styles.text}>{item?.user_name}</Text>
+                }
               </View>
 
               <View>
