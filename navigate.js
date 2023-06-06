@@ -27,7 +27,7 @@ import NewsLenta from "./News/NewsLenta";
 import InfoNews from "./News/infoNews";
 import RatingPage from "./pages/RatingPage";
 
-import VideoCourses from "./pages/VideoCourses";
+import VideoCourses from "./pages/videoCourses";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
