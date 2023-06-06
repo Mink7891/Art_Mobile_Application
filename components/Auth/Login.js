@@ -72,7 +72,7 @@ const Login = () => {
               <TextInput
                 style={styles.TextInput}
                 placeholder="Логин"
-                placeholderTextColor='white'
+                placeholderTextColor='#B3C19F'
                 value={login}
                 onChangeText={(e) => setLogin(e)}
               />
@@ -81,8 +81,8 @@ const Login = () => {
               <TextInput
                 style={styles.TextInput}
                 placeholder="Пароль"
+                placeholderTextColor='#B3C19F'
                 autoCorrect={false}
-                placeholderTextColor='white'
                 value={password}
                 autoCapitalize="none"
                 textContentType="newPassword"
