@@ -1,7 +1,7 @@
 import {StyleSheet, View, TextInput, SafeAreaView, Text, Alert, Button, TouchableOpacity} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {clearErrorMessage, signupUser} from "../../slice/authSlice";
+import {clearErrorMessage, signupUser} from "../../store/slice/authSlice";
 import Loader from "../../News/Loader";
 import CustomButton from "../CustomButton";
 import {useNavigation, useIsFocused} from "@react-navigation/native";
@@ -11,8 +11,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const isFocus = useIsFocused();
-  const [login, setLogin] = useState('SashaSev');
-  const [password, setPassword] = useState('12345');
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
 
   const {isFetching, isError, errorMessage} = useSelector(state => state.auth);
 

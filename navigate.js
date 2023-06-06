@@ -19,7 +19,7 @@ import Quiz from "./components/Tasks/Quiz/Quiz";
 import VideoGame from "./components/Tasks/VideoGame/VideoGame";
 import MemoryCard from "./components/Tasks/MemoryCard/MemoryCard";
 
-import MoscowMap from './FoldersScripts/MoscowMap';
+import MoscowMap from './components/FoldersScripts/MoscowMap';
 import NewsLentaPage from "./pages/NewsLentaPage";
 import InfoNews from "./News/infoNews";
 import RatingPage from "./pages/RatingPage";

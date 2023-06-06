@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import $api from "../http";
+import $api from "../../http";
 
 const initialState = {
   isFetching: false,
