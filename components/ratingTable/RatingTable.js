@@ -10,7 +10,7 @@ const RatingTable = () => {
   const isFocused = useIsFocused();
   const {userInfo} = useSelector((state) => state.auth);
   const [users, setUsers] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchRate = async () => {
@@ -65,11 +65,11 @@ const RatingTable = () => {
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-          {
-            isLoading
-              ? <Loader/>
-              : null
-          }
+          {/*{*/}
+          {/*  isLoading*/}
+          {/*    ? <Loader/>*/}
+          {/*    : null*/}
+          {/*}*/}
           <View>
             <Text style={styles.text}>
               Место

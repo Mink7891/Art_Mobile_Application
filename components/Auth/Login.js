@@ -41,7 +41,6 @@ const Login = () => {
     dispatch(signupUser({login, password}))
       .then(async (res) => {
         if (res.payload?.status === 200) {
-          console.log(res.payload.userInfo.user_role)
           await navigation.navigate('Course')
         }
       })

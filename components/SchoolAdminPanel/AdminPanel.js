@@ -62,6 +62,22 @@ const AdminPanel = () => {
             </TouchableOpacity>
         </View>
       </View>
+      <View style={{
+        flex: 1,
+        alignItems: 'center',
+        marginTop: 20,
+      }}>
+        <TouchableOpacity onPress={() => navigation.navigate('ProfileUser')}>
+          <Text style={{
+            color: 'blue',
+            fontSize: 22,
+            borderBottomWidth: 1,
+            borderBottomColor: 'blue'
+          }}>
+            Перейти в профиль
+          </Text>
+        </TouchableOpacity>
+      </View>
     </ImageBackground>
   );
 };

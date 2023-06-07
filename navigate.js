@@ -90,6 +90,10 @@ export default function Navigate() {
                   userInfo?.user_role === 1
                     ? (<>
                         <Stack.Screen name='Profile' component={AdminPanel}/>
+                        <Stack.Screen name='ProfileUser' component={ProfilePage} options={{
+                          headerShown: true,
+                          title: 'Профиль'
+                        }}/>
                         <Stack.Screen name='AddNews' component={AddNews} options={{
                           headerShown: true,
                           title: 'Добавление новости'
