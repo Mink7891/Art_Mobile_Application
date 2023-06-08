@@ -14,13 +14,19 @@ const Filter = ({ onDirectionFilter, onDistrictFilter, onAreaFilter, selectedDir
     
 
   useEffect(() => {
-    const fetchData = async () => {
-      const addresses = await processAddresses(); // Вызываем функцию processAddresses() для получения списка адресов
-      setAddresses(addresses); // Устанавливаем список адресов в состояние
+    const fetchData = () => {
+      processAddresses()
+        .then(addresses => {
+          setAddresses(addresses);
+        })
+        .catch(error => {
+          console.error('Error fetching addresses:', error);
+        });
     };
   
     fetchData();
   }, []);
+  
 
   const handleDirectionPress = (direction) => {
     const isSelected = selectedDirections && selectedDirections.includes(direction);

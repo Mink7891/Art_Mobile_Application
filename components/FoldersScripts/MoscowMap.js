@@ -6,7 +6,9 @@ import InfoWindow from './InfoWindow';
 import Filter from './Filter';
 import * as Location from 'expo-location';
 import { processAddresses, geocodeAddress, getArea } from './getDistrictByAddress'
+import apiConfig from '../../app.json';
 
+const opencagedata = apiConfig.expo.android.config.googleMaps.apiKey.split(',')[1];
 
 
 const MoscowMap = () => {
@@ -99,7 +101,7 @@ const MoscowMap = () => {
         if (coordinates) {
           const latitude = coordinates.latitude;
           const longitude = coordinates.longitude;
-          const area = await getArea(latitude, longitude, '3baa315089ed48d5b46b0f7e18c09074');
+          const area = await getArea(latitude, longitude, opencagedata);
           updatedMarkers.push({ ...marker, latitude, longitude, area });
         }
       }

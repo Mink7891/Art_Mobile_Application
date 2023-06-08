@@ -2,18 +2,13 @@
   "build": {
     "preview": {
       "android": {
-        "buildType": "apk",
-        "permissions": [
-          "INTERNET"
-        ]
+        "buildType": "apk"
       }
     },
     "preview2": {
       "android": {
         "gradleCommand": ":app:assembleRelease",
-        "permissions": [
-          "INTERNET"
-        ]
+        "buildType": "apk"
       }
     },
     "preview3": {
