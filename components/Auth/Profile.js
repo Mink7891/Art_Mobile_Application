@@ -5,6 +5,8 @@ import {logOut} from "../../store/slice/authSlice";
 import Loader from "../../News/Loader";
 import LinePersonInformation from "../LinePersonInformation";
 import {useNavigation} from "@react-navigation/native";
+import LinePersonAchievement from "../LinePersonAchievement.js"
+
 
 const Profile = () => {
   const dispatch = useDispatch();
