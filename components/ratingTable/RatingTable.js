@@ -28,7 +28,7 @@ const RatingTable = () => {
 
   useEffect(() => {
     fetchRate();
-  }, [])
+  }, [isFocused])
 
 
   return (

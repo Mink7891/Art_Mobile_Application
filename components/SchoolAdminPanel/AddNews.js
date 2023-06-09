@@ -11,23 +11,37 @@ const AddNews = ({route}) => {
 
   const [newsImg, setNewsImg] = useState('');
   const [newsLinkImg, setNewsLinkImg] = useState('');
+  const [imageIsUpload, setImageIsUpload] = useState(false);
 
   const [newsDate, setNewsDate] = useState(new Date().toLocaleString());
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
 
-  const createNews = async () => {
+  const uploadImage = async () => {
     try {
       setIsLoading(true);
       const data = new FormData();
       data.append("image", {uri: newsImg, name: `${Date.now()}.jpg`, type: 'image/jpg'})
-      const uploadImage = await $api.post('/upload', data, {
+      const response = await $api.post('/upload', data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      }).then((res) => setNewsLinkImg(res.data.url))
+      })
+      setNewsLinkImg(response.data.url)
+      setImageIsUpload(true);
+    } catch (e) {
+      setImageIsUpload(false);
+      setError(e.response.data);
+      console.log(e.response.data)
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
+  const createNews = async () => {
+    try {
+      setIsLoading(true);
       const response = await $api.post('/news/create', {
         user_id: news_auth,
         news_title: newsTitle,
@@ -60,7 +74,6 @@ const AddNews = ({route}) => {
     });
 
     if (!result.canceled) {
-      console.log(result.assets[0]);
       setNewsImg(result.assets[0].uri);
     }
   }
@@ -133,10 +146,25 @@ const AddNews = ({route}) => {
               fontSize: 20,
               color: 'blue',
             }}>
-              Загрузить изображение
+              Выбрать изображение
             </Text>
           </TouchableOpacity>
+
+          {
+            !imageIsUpload && newsImg ? (
+              <TouchableOpacity onPress={uploadImage} style={{marginTop: 20}}>
+                <Text style={{
+                  fontSize: 20,
+                  color: 'red',
+                }}>
+                  Загрузить фотографию
+                </Text>
+              </TouchableOpacity>
+            ) : null
+          }
+
         </View>
+
 
         <View style={{...styles.TextInputForm, marginBottom: 10}}>
           <Text style={{
@@ -154,21 +182,25 @@ const AddNews = ({route}) => {
         <View style={{
           marginTop: 30
         }}>
-          <TouchableOpacity onPress={createNews} style={{
-            backgroundColor: 'black',
-            padding: 6,
-            width: 150,
-            borderRadius: 10
-          }}>
-            <Text style={{
-              fontSize: 18,
-              color: 'white',
-              textAlign: 'center',
-              fontWeight: 'bold'
-            }}>
-              Создать новость!
-            </Text>
-          </TouchableOpacity>
+          {
+            imageIsUpload && (
+              <TouchableOpacity onPress={createNews} style={{
+                backgroundColor: 'black',
+                padding: 6,
+                width: 150,
+                borderRadius: 10
+              }}>
+                <Text style={{
+                  fontSize: 18,
+                  color: 'white',
+                  textAlign: 'center',
+                  fontWeight: 'bold'
+                }}>
+                  Создать новость!
+                </Text>
+              </TouchableOpacity>
+            )
+          }
         </View>
 
       </View>
