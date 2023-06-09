@@ -27,7 +27,6 @@ import RatingPage from "./pages/RatingPage";
 import VideoCoursesPage from "./pages/VideoCoursesPage";
 import AdminPanel from "./components/SchoolAdminPanel/AdminPanel";
 import AddNews from "./components/SchoolAdminPanel/AddNews";
-import AddVideoCourse from "./components/SchoolAdminPanel/AddVideoCourse";
 
 import Train from "./pages/TrainPage.js/Train"
 import FullViewAge from "./pages/TrainPage.js/FullViewAge";
@@ -105,10 +104,6 @@ export default function Navigate() {
                     <Stack.Screen name='AddNews' component={AddNews} options={{
                       headerShown: true,
                       title: 'Добавление новости'
-                    }} />
-                    <Stack.Screen name='AddVideoCourse' component={AddVideoCourse} options={{
-                      headerShown: true,
-                      title: 'Добавление видео курса'
                     }} />
                     <Stack.Screen name='ListNewsAdmin' component={ListNews} options={{
                       headerShown: true,

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import $api from "../../http";
 import {useIsFocused} from "@react-navigation/native";
-import {StyleSheet, FlatList, Text, View, Dimensions} from "react-native";
+import {StyleSheet, FlatList, Text, View} from "react-native";
 import Loader from "../../News/Loader";
 import {useSelector} from "react-redux";
 

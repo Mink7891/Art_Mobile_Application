@@ -2,12 +2,8 @@ import {Alert, Dimensions, FlatList, Image, SafeAreaView, StyleSheet, Text, Touc
 import React, {useEffect, useState} from "react";
 import $api from "../../http";
 import Loader from "../../News/Loader";
-import {useNavigation} from "@react-navigation/native";
 
 const screenDimensions = Dimensions.get('screen');
-
-// http://localhost:8080/news/delete
-//   в параметрах news_id указывать
 
 const ListNews = ({route, navigation}) => {
   const [news, setNews] = useState();
@@ -80,8 +76,9 @@ const ListNews = ({route, navigation}) => {
             <View style={{
               alignSelf: 'center',
               borderRadius: 15,
+              marginBottom: 15,
               width: screenDimensions.width - 70,
-              backgroundColor: 'rgba(225,225,225,0.7)'
+              backgroundColor: 'rgba(225,225,225,0.91)'
             }}>
               <TouchableOpacity onPress={() => {
                 navigation.navigate('InfoNews', {
@@ -157,8 +154,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee',
     marginBottom: 24,
     borderRadius: 24,
-
-    // ...boxShadow
   },
   imageContainer: {
     flex: 1,

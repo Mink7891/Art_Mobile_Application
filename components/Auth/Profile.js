@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Button, Image, Text, View, ImageBackground, ScrollView, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../../store/slice/authSlice";
+import React, {useEffect} from 'react';
+import {StyleSheet, Button, Image, Text, View, ImageBackground, ScrollView, TouchableOpacity} from "react-native";
+import {useDispatch, useSelector} from "react-redux";
+import {logOut} from "../../store/slice/authSlice";
 import Loader from "../../News/Loader";
 import LinePersonInformation from "../LinePersonInformation";
-import { useNavigation } from "@react-navigation/native";
-import LinePersonAchievement from '../LinePersonAchievement';
-import { fetchAchievementsUser } from '../../API/tasks.api';
+import {useNavigation} from "@react-navigation/native";
 
 const Profile = () => {
   const dispatch = useDispatch();
