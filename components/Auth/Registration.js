@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {clearErrorMessage, registrationUser, signupUser} from "../../store/slice/authSlice";
+import {clearErrorMessage, registrationUser} from "../../store/slice/authSlice";
 import Loader from "../../News/Loader";
 import CustomButton from "../CustomButton";
 import {useIsFocused, useNavigation} from "@react-navigation/native";
@@ -26,10 +26,12 @@ const Registration = () => {
   const [lastname, setLastName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [age, setAge] = useState();
-  const [education, setEducation] = useState();
+
+  // const data for reg
+  const [email, setEmail] = useState('test@sfds.ru');
+  const [phone, setPhone] = useState('8396818347');
+  const [age, setAge] = useState(20);
+  const [education, setEducation] = useState(1);
 
   const [step, setStep] = useState(1);
 
@@ -68,7 +70,7 @@ const Registration = () => {
       if (res.payload?.status === 200) {
         Alert.alert(
           'Ваш профиль успешно создан',
-          `Войдите в него и подтвердите аккаунт по почте.`,
+          ``,
           [
             {
               text: 'Ok',
@@ -150,72 +152,6 @@ const Registration = () => {
           <View style={{...styles.TextInputForm, marginBottom: 10}}>
             <TextInput
               style={styles.TextInput}
-              placeholder="Пароль"
-              placeholderTextColor='#B3C19F'
-              value={password}
-              onChangeText={(e) => setPassword(e)}
-            />
-          </View>
-
-          <View style={{...styles.TextInputForm, marginBottom: 10}}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Возраст"
-              placeholderTextColor='#B3C19F'
-              value={age?.toString()}
-              onChangeText={(e) => setAge(e)}
-            />
-          </View>
-
-          <View style={styles.TextInputForm}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Образование"
-              placeholderTextColor='#B3C19F'
-
-              value={education?.toString()}
-              onChangeText={(e) => setEducation(e)}
-            />
-          </View>
-        </View>
-
-        <View style={{
-          alignItems: 'center'
-        }}>
-          <CustomButton
-            onPress={() => setStep(prevState => prevState + 1)}
-            title={'Далее'}
-            sizeButton={'40%'}
-          />
-
-          <TouchableOpacity onPress={() => setStep(prevState => prevState - 1)}>
-            <Text style={{
-              fontSize: 18,
-              color: 'white'
-            }}>
-              Назад
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-      </View>
-    )
-  }
-
-  function thirdStepReg() {
-    return (
-      <View style={{
-        flex: 1
-      }}>
-        <View style={styles.title}>
-          <Text style={styles.titleText}>
-            Регистрация
-          </Text>
-        </View>
-        <View style={{...styles.wrapperInput, justifyContent: 'center'}}>
-          <View style={{...styles.TextInputForm, marginBottom: 10}}>
-            <TextInput
-              style={styles.TextInput}
               placeholder="Логин"
               value={login}
               placeholderTextColor='#B3C19F'
@@ -226,20 +162,10 @@ const Registration = () => {
           <View style={{...styles.TextInputForm, marginBottom: 10}}>
             <TextInput
               style={styles.TextInput}
-              placeholder="Электронная почта"
+              placeholder="Пароль"
               placeholderTextColor='#B3C19F'
-              value={email}
-              onChangeText={(e) => setEmail(e)}
-            />
-          </View>
-
-          <View style={{...styles.TextInputForm, marginBottom: 10}}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Номер телефона"
-              placeholderTextColor='#B3C19F'
-              value={phone?.toString()}
-              onChangeText={(e) => setPhone(e)}
+              value={password}
+              onChangeText={(e) => setPassword(e)}
             />
           </View>
         </View>
@@ -285,8 +211,6 @@ const Registration = () => {
 
           {step === 1 && firstStepReg()}
           {step === 2 && secondStepReg()}
-          {step === 3 && thirdStepReg()}
-
 
           <View style={{
             flexDirection: 'row',
@@ -295,7 +219,6 @@ const Registration = () => {
           }}>
             <View style={step >= 1 ? {...styles.block, backgroundColor: 'green'} : styles.block}></View>
             <View style={step >= 2 ? {...styles.block, backgroundColor: 'green'} : styles.block}></View>
-            <View style={step === 3 ? {...styles.block, backgroundColor: 'green'} : styles.block}></View>
           </View>
 
 

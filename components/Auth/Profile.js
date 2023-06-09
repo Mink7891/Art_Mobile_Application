@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StyleSheet, Button, Image, Text, View, ImageBackground, ScrollView, TouchableOpacity} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {logOut} from "../../store/slice/authSlice";
