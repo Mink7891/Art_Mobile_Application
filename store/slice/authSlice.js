@@ -76,6 +76,7 @@ export const authSlice = createSlice({
         state.isFetching = false;
         state.isAuth = true;
         state.userInfo = payload.userInfo;
+        state.user_rating = payload.userInfo.user_rating;
         state.token = payload.accessToken;
 
         state.isError = false;
