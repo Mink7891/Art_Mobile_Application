@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ImageBackground, Text, View, StyleSheet, Dimensions, TouchableOpacity, Button } from 'react-native';
 import { Audio, Video, ResizeMode } from 'expo-av';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { fetchVideosContent } from '../../../API/tasks.api';
+import { answerByUserVideo, fetchVideosContent } from '../../../API/tasks.api';
 import VideoContainer from './VideoContainer';
 import { useSelector } from 'react-redux';
 
@@ -92,9 +92,10 @@ export default function VideoGame() {
     }
 
 
-    const answerButton = (index) => {
+    const answerButton = async (index) => {
         setDisableButtons(true)
         if (index == videoList[step].currentanswer) {
+            await answerByUserVideo(videoList[step].task_id, index, accessToken,accessToken)
             soundRef.current.pauseAsync()
             setAnswersVisible(false)
             setVideoIsMuted(false)

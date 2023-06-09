@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, StyleSheet, Text, Image } from 'react-native';
+import { View, ScrollView, StyleSheet, Text, Image, SafeAreaView } from 'react-native';
 import Tablet from './Tablet';
 
 
@@ -10,33 +10,31 @@ const FullViewAge = ({ route }) => {
 
     const { text, img, title } = route.params
 
-    
+
 
 
 
 
 
     return (
-        <View style={styles.container}>
-            <ScrollView>
-                <Text style={styles.h1}>{title}</Text>
-                <View style={styles.imgContainer}>
-                    <Image style={styles.img} source={{ uri: img }} resizeMode="cover"></Image>
-                </View>
-                <View>
+        <SafeAreaView style={{flex : 1}}>
+            <View style={styles.container}>
+                <ScrollView >
+                    <Text style={styles.h1}>{title}</Text>
+                    <View style={styles.imgContainer}>
+                        <Image style={styles.img} source={{ uri: img }} resizeMode="cover"></Image>
+                    </View>
+                    <View>
 
-                    <Text style={styles.text}>
-                        {text.split("<br/>").join("\n")}
-                    </Text>
-
-
-                </View>
-            </ScrollView>
+                        <Text style={styles.text}>
+                            {text.split("<br/>").join("\n")}
+                        </Text>
 
 
-
-
-        </View>
+                    </View>
+                </ScrollView>
+            </View >
+        </SafeAreaView>
     );
 };
 
@@ -49,6 +47,7 @@ const styles = StyleSheet.create({
     },
 
     h1: {
+        marginTop: 60,
         fontSize: 18,
         alignItems: "center",
         textAlign: 'center',
