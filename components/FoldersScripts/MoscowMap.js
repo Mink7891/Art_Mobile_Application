@@ -247,7 +247,6 @@ const MoscowMap = () => {
       <MapView
         ref={mapRef}
         style={styles.map}
-        customMapStyle={darkMapStyle}
         initialRegion={{
           latitude: 55.751244,
           longitude: 37.618423,
@@ -326,78 +325,6 @@ const MoscowMap = () => {
     </View>
   );
 };
-
-const darkMapStyle = [
-  {
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#212121', // Цвет для геометрии
-      },
-    ],
-  },
-  {
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#ffffff', // Белый цвет для текста
-      },
-    ],
-  },
-  {
-    elementType: 'labels.text.stroke',
-    stylers: [
-      {
-        color: '#000000', // Цвет для контура текста
-      },
-    ],
-  },
-  {
-    featureType: 'road',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#484848', // Цвет для геометрии дороги
-      },
-    ],
-  },
-  {
-    featureType: 'road',
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#ffffff', // Белый цвет для текста дорог
-      },
-    ],
-  },
-  {
-    featureType: 'water',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#000000', // Цвет для воды
-      },
-    ],
-  },
-  {
-    featureType: 'water',
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#ffffff', // Белый цвет для текста на воде
-      },
-    ],
-  },
-  {
-    featureType: 'poi',
-    elementType: 'labels.text.fill',
-    stylers: [
-      {
-        color: '#ffffff', // Белый цвет для текста мест интереса (POI)
-      },
-    ],
-  },
-];
 
 
 const styles = StyleSheet.create({
