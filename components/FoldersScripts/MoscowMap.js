@@ -49,10 +49,10 @@ const MoscowMap = () => {
     };
 
     const isInMoscowBounds =
-      region.latitude >= moscowRegion.latitude - moscowRegion.latitudeDelta / 0.9 &&
-      region.latitude <= moscowRegion.latitude + moscowRegion.latitudeDelta / 0.9 &&
-      region.longitude >= moscowRegion.longitude - moscowRegion.longitudeDelta / 0.9 &&
-      region.longitude <= moscowRegion.longitude + moscowRegion.longitudeDelta / 0.9;
+      region.latitude >= moscowRegion.latitude - moscowRegion.latitudeDelta / 0.6 &&
+      region.latitude <= moscowRegion.latitude + moscowRegion.latitudeDelta / 0.6 &&
+      region.longitude >= moscowRegion.longitude - moscowRegion.longitudeDelta / 0.6 &&
+      region.longitude <= moscowRegion.longitude + moscowRegion.longitudeDelta / 0.6;
 
     if (!isInMoscowBounds && previousRegion) {
       mapRef.current.animateToRegion(previousRegion, 500);
@@ -246,6 +246,7 @@ const MoscowMap = () => {
       <MapView
         ref={mapRef}
         style={styles.map}
+        customMapStyle={greenWhiteMapStyle}
         initialRegion={{
           latitude: 55.751244,
           longitude: 37.618423,
@@ -324,6 +325,78 @@ const MoscowMap = () => {
     </View>
   );
 };
+
+const greenWhiteMapStyle = [
+  {
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#c8e6c9', // Зеленый цвет для геометрии
+      },
+    ],
+  },
+  {
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#ffffff', // Белый цвет для текста
+      },
+    ],
+  },
+  {
+    elementType: 'labels.text.stroke',
+    stylers: [
+      {
+        color: '#388e3c', // Зеленый цвет для контура текста
+      },
+    ],
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#81c784', // Зеленый цвет для геометрии дороги
+      },
+    ],
+  },
+  {
+    featureType: 'road',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#ffffff', // Белый цвет для текста дорог
+      },
+    ],
+  },
+  {
+    featureType: 'water',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#64b5f6', // Голубой цвет для воды
+      },
+    ],
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#1976d2', // Синий цвет для текста на воде
+      },
+    ],
+  },
+  {
+    featureType: 'poi',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#ffffff', // Белый цвет для текста мест интереса (POI)
+      },
+    ],
+  },
+];
 
 const styles = StyleSheet.create({
   container: {
