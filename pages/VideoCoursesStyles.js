@@ -46,13 +46,14 @@ const styles = {
       
       flexDirection: 'column',
       flexWrap: 'wrap',
-      justifyContent: 'space-between',
+    //justifyContent: 'space-between',
       alignItems: 'center',
       paddingTop: 0,
      
   
     },
     card: {
+      flex: 1,
       width: '100%',
       aspectRatio: 16 / 9,
       marginBottom: 60,
@@ -60,16 +61,18 @@ const styles = {
     },
     imageContainer:{
         flex: 1,
+        overflow: 'hidden',
     },
     image: {
      
       width: '100%',
-      height: 200,
-   
+      height: '100%',
+      
       resizeMode: 'cover',
     },
     overlay: {
       position: 'absolute',
+      height: 60,
       bottom: -60,
       left: 0,
       right: 0,
@@ -94,6 +97,23 @@ const styles = {
       justifyContent: 'center',
       
   
+    },
+    platformY:{
+        position: 'absolute',
+        right: 10,
+        top: 10,
+        backgroundColor: 'red',
+        padding: 2,
+        borderRadius: 6,
+        color: 'white',
+    },
+    platformR:{
+        position: 'absolute',
+        right: 10,
+        top: 10,
+        backgroundColor: '#001075',
+        padding: 2,
+        borderRadius: 6
     },
   };
 

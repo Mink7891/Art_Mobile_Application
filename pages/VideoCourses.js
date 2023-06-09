@@ -11,6 +11,16 @@ const videos = [
     category: 'Хореография',
     image: require('../assets/danceMSHI.jpg'),
     url: 'https://youtu.be/b4n5SDh17-Q?list=PLXhwhTO-T9tTfe_q_Z56XV0UYVkt92T0R',
+    platform: 'YouTube',
+  },
+  {
+    id: 'video5',
+    title: 'Nick Johnston - Weakened by Winter.',
+    description: 'Ольга Крыскина',
+    category: 'Гитара',
+    image: require('../assets/prevGuitar.png'),
+    url: 'https://rutube.ru/video/32eace56f088e144cec9be9e8c12e99e/?playlist=80852',
+    platform: 'RUTUBE',
   },
   {
     id: 'video2',
@@ -19,6 +29,7 @@ const videos = [
     category: 'Пианино',
     image: require('../assets/piano.jpg'),
     url: 'https://youtu.be/AWtChUlG2Uw',
+    platform: 'YouTube',
   },
   {
     id: 'video3',
@@ -27,6 +38,7 @@ const videos = [
     category: 'Скрипка',
     image: require('../assets/violinRUSSIAN.jpg'),
     url: 'https://youtu.be/QU_BP3PRCXI',
+    platform: 'YouTube',
   },
   {
     id: 'video4',
@@ -35,7 +47,9 @@ const videos = [
     category: 'Гитара',
     image: require('../assets/guitar.jpg'),
     url: 'https://youtu.be/GjVuiUoU9bw',
+    platform: 'YouTube',
   },
+
 
 ];
 
@@ -117,7 +131,9 @@ const VideoCourses = () => {
                 <Text style={styles.title}>{video.title}</Text>
                 <Text style={styles.description}>{video.description}</Text>
               </View>
-
+              <View style={video.platform === 'YouTube' ? styles.platformY : styles.platformR}>
+                <Text style={{color: 'white'}}>{video.platform}</Text> 
+              </View>
             </TouchableOpacity>
             
           ))}
