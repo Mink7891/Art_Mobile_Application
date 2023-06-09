@@ -26,7 +26,7 @@ export const answerByUser = (quiz_id,user_answer,token) => {
 }
 
 
-export const fetchVideosContent = () => {
+export const fetchVideosContent = (token) => {
   return fetch(VIDEOS_TASK_URL , {method: 'GET',headers: {Authorization: `Bearer ${token}`, }})
     .then(response => response.json())
     .catch(error => {

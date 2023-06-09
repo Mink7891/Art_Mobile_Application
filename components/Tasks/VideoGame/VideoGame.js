@@ -4,11 +4,12 @@ import { Audio, Video, ResizeMode } from 'expo-av';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { fetchVideosContent } from '../../../API/tasks.api';
 import VideoContainer from './VideoContainer';
+import { useSelector } from 'react-redux';
 
 
 export default function VideoGame() {
 
-
+    
     const praises = ['Умничка!', 'Молодец! Всё правильно', 'У тебя хорошо получается!', 'Правильно!', 'Супер!']
 
     const wrongs = ['Звучит шедеврально, но персонажи в шоке', 'Отличная попытка!', 'Эх, думаю вам следует пересмотреть данный фрагмент', 'Вы правда так думаете???']
@@ -27,7 +28,7 @@ export default function VideoGame() {
     const [disableButtons, setDisableButtons] = useState(false)
     const [loadingVideo, setLoadingVideo] = useState(true)
     const [videoList, setVideoList] = useState()
-
+    const {accessToken} = useSelector((state) => state.auth.userInfo);
 
     const soundPlay = async (music, i) => {
        
@@ -45,7 +46,7 @@ export default function VideoGame() {
         const getData = async () => {
             try {
                 setLoadingVideo(true)
-                const fetchedData = await fetchVideosContent();
+                const fetchedData = await fetchVideosContent(accessToken);
                 setVideoList(fetchedData)
                 setLoadingVideo(false)
                 
