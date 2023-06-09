@@ -34,10 +34,8 @@ export default function Quiz() {
     setDisable(true)
     setAnswer(true)
     setChooseButton(index)
-    if (quiz[step].task_correct_answer == index) {
-      dispatch(updateRate(1))
+    if (quiz[step].task_correct_answer === index) {
       await answerByUser(quiz[step].task_id, index, accessToken)
-      
     }
     else {
       console.log("Неправильно")
