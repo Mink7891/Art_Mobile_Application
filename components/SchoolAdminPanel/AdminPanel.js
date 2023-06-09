@@ -8,14 +8,6 @@ const AdminPanel = () => {
   const {userInfo} = useSelector((state) => state.auth);
 
 
-  const fetchData = async () => {
-    try {
-
-    } catch (e) {
-
-    }
-  }
-
   return (
     <ImageBackground style={{
       flex: 1,
@@ -57,31 +49,14 @@ const AdminPanel = () => {
 
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('AddVideoCourse', {
-              auth_id: userInfo?.user_id
+            onPress={() => navigation.navigate('ListNewsAdmin', {
+              "user_id": userInfo.user_id
             })}
           >
             <Text style={{
               color: 'white',
               fontSize: 16,
               textAlign: 'center'
-            }}>
-              Создать видеокурс
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={{
-          alignItems: 'center',
-          marginBottom: 30
-        }}>
-          <TouchableOpacity onPress={() => navigation.navigate('ListNewsAdmin', {
-            "user_id": userInfo.user_id
-          })}>
-            <Text style={{
-              fontSize: 18,
-              borderBottomWidth: 1,
-              borderColor: 'black'
             }}>
               Список новостей от школы
             </Text>
