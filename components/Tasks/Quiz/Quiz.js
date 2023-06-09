@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Dimensions, ImageBackground, Button } from 'rea
 import { answerByUser, fetchData } from '../../../API/tasks.api';
 
 import QuizQuestion from './QuizQuestion';
+import { useSelector } from 'react-redux';
 
 
 
@@ -17,6 +18,7 @@ export default function Quiz() {
   const [answer, setAnswer] = useState(false)
   const [disable,setDisable] = useState(false)
   const [chooseButton,setChooseButton] = useState(-1)  
+  const {accessToken} = useSelector((state) => state.auth.userInfo);
 
   const shuffle = (array) => {
     return array.sort(() => Math.random() - 0.5)
@@ -32,7 +34,8 @@ export default function Quiz() {
     setAnswer(true)
     setChooseButton(index)
     if (quiz[step].task_correct_answer == index) {
-      await answerByUser(quiz[step].task_id, index)
+      
+      await answerByUser(quiz[step].task_id, index, accessToken)
       
     }
     else {
@@ -51,7 +54,7 @@ export default function Quiz() {
   useEffect(() => {
     const getData = async() => {
       try {
-        const fetchedData = await fetchData();
+        const fetchedData = await fetchData(accessToken);
         setQuiz(shuffle(fetchedData))
         
        
@@ -84,7 +87,6 @@ export default function Quiz() {
     resizeMode="cover"
   >
     <View style={styles.variants_container}>
-      
       {quiz ? 
         step != quiz.length ? <QuizQuestion chooseButton={chooseButton} isDisable={disable} onClickVariant={onClickVariant} question={quiz[step]}/> : <Text>Вопросы закончились. В будущем их будет больше</Text>: <Text>Загрузка...</Text>}
       {answer ? <Text style={styles.answerContainer}>{quiz[step].task_correct_desc}</Text> : <></>}
