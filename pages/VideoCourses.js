@@ -144,9 +144,5 @@ const VideoCourses = () => {
 
   );
 };
-/*
-<View style={styles.overlay}>
-                <Text style={styles.title}>{video.title}</Text>
-                <Text style={styles.description}>{video.description}</Text>
-              </View>*/
+
 export default VideoCourses;

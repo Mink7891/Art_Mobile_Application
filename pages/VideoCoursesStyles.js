@@ -55,13 +55,15 @@ const styles = {
     card: {
       flex: 1,
       width: '100%',
-      aspectRatio: 16 / 9,
-      marginBottom: 60,
+      height: 250,
+      //aspectRatio: 16 / 9,
+      marginBottom: 0,
     
     },
     imageContainer:{
         flex: 1,
         overflow: 'hidden',
+
     },
     image: {
      
@@ -70,15 +72,18 @@ const styles = {
       
       resizeMode: 'cover',
     },
-    overlay: {
+  overlay: {
+      /* 
       position: 'absolute',
       height: 60,
       bottom: -60,
       left: 0,
-      right: 0,
+      right: 0,*/  
       padding: 10,
       backgroundColor: 'rgba(0, 0, 0, 0.7)',
-
+  
+      justifyContent: 'center',
+      alignItems: 'flex-start',
     },
     title: {
       color: '#e0e0e0',
