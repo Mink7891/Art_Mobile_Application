@@ -8,6 +8,7 @@ import * as Location from 'expo-location';
 import { processAddresses, geocodeAddress, getArea } from './getDistrictByAddress'
 import apiConfig from '../../app.json';
 
+
 const opencagedata = apiConfig.expo.android.config.googleMaps.apiKey.split(',')[1];
 
 
@@ -246,7 +247,7 @@ const MoscowMap = () => {
       <MapView
         ref={mapRef}
         style={styles.map}
-        customMapStyle={greenWhiteMapStyle}
+        customMapStyle={darkMapStyle}
         initialRegion={{
           latitude: 55.751244,
           longitude: 37.618423,
@@ -326,12 +327,12 @@ const MoscowMap = () => {
   );
 };
 
-const greenWhiteMapStyle = [
+const darkMapStyle = [
   {
     elementType: 'geometry',
     stylers: [
       {
-        color: '#c8e6c9', // Зеленый цвет для геометрии
+        color: '#212121', // Цвет для геометрии
       },
     ],
   },
@@ -347,7 +348,7 @@ const greenWhiteMapStyle = [
     elementType: 'labels.text.stroke',
     stylers: [
       {
-        color: '#388e3c', // Зеленый цвет для контура текста
+        color: '#000000', // Цвет для контура текста
       },
     ],
   },
@@ -356,7 +357,7 @@ const greenWhiteMapStyle = [
     elementType: 'geometry',
     stylers: [
       {
-        color: '#81c784', // Зеленый цвет для геометрии дороги
+        color: '#484848', // Цвет для геометрии дороги
       },
     ],
   },
@@ -374,7 +375,7 @@ const greenWhiteMapStyle = [
     elementType: 'geometry',
     stylers: [
       {
-        color: '#64b5f6', // Голубой цвет для воды
+        color: '#000000', // Цвет для воды
       },
     ],
   },
@@ -383,7 +384,7 @@ const greenWhiteMapStyle = [
     elementType: 'labels.text.fill',
     stylers: [
       {
-        color: '#1976d2', // Синий цвет для текста на воде
+        color: '#ffffff', // Белый цвет для текста на воде
       },
     ],
   },
@@ -397,6 +398,7 @@ const greenWhiteMapStyle = [
     ],
   },
 ];
+
 
 const styles = StyleSheet.create({
   container: {
