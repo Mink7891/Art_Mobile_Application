@@ -60,9 +60,7 @@ const styles = {
     },
     imageContainer:{
         flex: 1,
-
     },
-
     image: {
      
       width: '100%',
@@ -71,8 +69,6 @@ const styles = {
       resizeMode: 'cover',
     },
     overlay: {
-
-
       position: 'absolute',
       bottom: -60,
       left: 0,
