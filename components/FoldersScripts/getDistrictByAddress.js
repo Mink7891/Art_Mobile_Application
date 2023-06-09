@@ -1,5 +1,12 @@
 import axios from 'axios';
 import school from '../../school.json'
+import apiConfig from '../../app.json';
+
+const apiKeys = apiConfig.expo.android.config.googleMaps.apiKey.split(',');
+const yandex = apiKeys[0];
+const opencagedata = apiKeys[1];
+
+
 
 async function getArea(latitude, longitude, api_key) {
   const url = 'https://api.opencagedata.com/geocode/v1/json';
@@ -32,7 +39,7 @@ async function getArea(latitude, longitude, api_key) {
   }
 }
 
-const api_key = '3baa315089ed48d5b46b0f7e18c09074';
+const api_key = opencagedata;
 
 const markers = [];
 
@@ -41,7 +48,7 @@ const geocodeAddress = async (address) => {
       const response = await axios.get(
         `https://geocode-maps.yandex.ru/1.x/?format=json&geocode=${encodeURIComponent(
           address
-        )}&apikey=3def7766-dde6-4c97-a197-5c3ac2a26e4b`
+        )}&apikey=${yandex}`
       );
       const data =  await response.data;
       const foundLocations = data.response.GeoObjectCollection.featureMember;

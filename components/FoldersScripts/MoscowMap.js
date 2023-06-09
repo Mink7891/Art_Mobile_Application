@@ -6,7 +6,10 @@ import InfoWindow from './InfoWindow';
 import Filter from './Filter';
 import * as Location from 'expo-location';
 import { processAddresses, geocodeAddress, getArea } from './getDistrictByAddress'
+import apiConfig from '../../app.json';
 
+
+const opencagedata = apiConfig.expo.android.config.googleMaps.apiKey.split(',')[1];
 
 
 const MoscowMap = () => {
@@ -47,10 +50,10 @@ const MoscowMap = () => {
     };
 
     const isInMoscowBounds =
-      region.latitude >= moscowRegion.latitude - moscowRegion.latitudeDelta / 0.9 &&
-      region.latitude <= moscowRegion.latitude + moscowRegion.latitudeDelta / 0.9 &&
-      region.longitude >= moscowRegion.longitude - moscowRegion.longitudeDelta / 0.9 &&
-      region.longitude <= moscowRegion.longitude + moscowRegion.longitudeDelta / 0.9;
+      region.latitude >= moscowRegion.latitude - moscowRegion.latitudeDelta / 0.6 &&
+      region.latitude <= moscowRegion.latitude + moscowRegion.latitudeDelta / 0.6 &&
+      region.longitude >= moscowRegion.longitude - moscowRegion.longitudeDelta / 0.6 &&
+      region.longitude <= moscowRegion.longitude + moscowRegion.longitudeDelta / 0.6;
 
     if (!isInMoscowBounds && previousRegion) {
       mapRef.current.animateToRegion(previousRegion, 500);
@@ -99,7 +102,7 @@ const MoscowMap = () => {
         if (coordinates) {
           const latitude = coordinates.latitude;
           const longitude = coordinates.longitude;
-          const area = await getArea(latitude, longitude, '3baa315089ed48d5b46b0f7e18c09074');
+          const area = await getArea(latitude, longitude, opencagedata);
           updatedMarkers.push({ ...marker, latitude, longitude, area });
         }
       }
@@ -244,6 +247,7 @@ const MoscowMap = () => {
       <MapView
         ref={mapRef}
         style={styles.map}
+        customMapStyle={darkMapStyle}
         initialRegion={{
           latitude: 55.751244,
           longitude: 37.618423,
@@ -322,6 +326,79 @@ const MoscowMap = () => {
     </View>
   );
 };
+
+const darkMapStyle = [
+  {
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#212121', // Цвет для геометрии
+      },
+    ],
+  },
+  {
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#ffffff', // Белый цвет для текста
+      },
+    ],
+  },
+  {
+    elementType: 'labels.text.stroke',
+    stylers: [
+      {
+        color: '#000000', // Цвет для контура текста
+      },
+    ],
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#484848', // Цвет для геометрии дороги
+      },
+    ],
+  },
+  {
+    featureType: 'road',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#ffffff', // Белый цвет для текста дорог
+      },
+    ],
+  },
+  {
+    featureType: 'water',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#000000', // Цвет для воды
+      },
+    ],
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#ffffff', // Белый цвет для текста на воде
+      },
+    ],
+  },
+  {
+    featureType: 'poi',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#ffffff', // Белый цвет для текста мест интереса (POI)
+      },
+    ],
+  },
+];
+
 
 const styles = StyleSheet.create({
   container: {
