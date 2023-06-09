@@ -35,8 +35,8 @@ export default function Quiz() {
     setAnswer(true)
     setChooseButton(index)
     if (quiz[step].task_correct_answer == index) {
-      dispatch(updateRate(1))
       await answerByUser(quiz[step].task_id, index, accessToken)
+      
       
     }
     else {
