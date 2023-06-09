@@ -70,6 +70,11 @@ const Tasks = ({ navigation }) => {
           <Text style={styles.buttonText}>Карточки</Text>
 
           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.gameButton} onPress={() => navigation.navigate('Train')}>
+          <Text style={styles.buttonText}>🚂</Text>
+          <Text style={styles.buttonText}>Карточки</Text>
+          </TouchableOpacity>
       </View>
     </View>
     </Layout>
