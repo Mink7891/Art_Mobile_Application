@@ -31,6 +31,8 @@ import AddVideoCourse from "./components/SchoolAdminPanel/AddVideoCourse";
 
 import Train from "./pages/TrainPage.js/Train"
 import FullViewAge from "./pages/TrainPage.js/FullViewAge";
+import ListNews from "./components/SchoolAdminPanel/ListNews";
+import EditNews from "./components/SchoolAdminPanel/EditNews";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -108,6 +110,14 @@ export default function Navigate() {
                       headerShown: true,
                       title: 'Добавление видео курса'
                     }} />
+                    <Stack.Screen name='ListNewsAdmin' component={ListNews} options={{
+                      headerShown: true,
+                      title: 'Новости от школы'
+                    }}/>
+                    <Stack.Screen name='EditNews' component={EditNews} options={{
+                      headerShown: true,
+                      title: "Редактирование новости"
+                    }}/>
                   </>
                   )
                   : (<Stack.Screen name='Profile' component={ProfilePage} options={{

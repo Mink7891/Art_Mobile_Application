@@ -1,11 +1,20 @@
 import {StyleSheet, View, Text, TouchableOpacity, ImageBackground} from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigation} from "@react-navigation/native";
+import {useState} from "react";
 
 const AdminPanel = () => {
   const navigation = useNavigation();
   const {userInfo} = useSelector((state) => state.auth);
 
+
+  const fetchData = async () => {
+    try {
+
+    } catch (e) {
+
+    }
+  }
 
   return (
     <ImageBackground style={{
@@ -31,36 +40,54 @@ const AdminPanel = () => {
           </Text>
         </View>
         <View style={styles.content}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('AddNews', {
-                auth_id: userInfo?.user_id
-              })}
-            >
-              <Text style={{
-                color: 'white',
-                fontSize: 18,
-                textAlign: 'center'
-              }}>
-                Создать новость
-              </Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('AddNews', {
+              auth_id: userInfo?.user_id
+            })}
+          >
+            <Text style={{
+              color: 'white',
+              fontSize: 18,
+              textAlign: 'center'
+            }}>
+              Создать новость
+            </Text>
+          </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('AddVideoCourse', {
-                auth_id: userInfo?.user_id
-              })}
-            >
-              <Text style={{
-                color: 'white',
-                fontSize: 16,
-                textAlign: 'center'
-              }}>
-                Создать видеокурс
-              </Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('AddVideoCourse', {
+              auth_id: userInfo?.user_id
+            })}
+          >
+            <Text style={{
+              color: 'white',
+              fontSize: 16,
+              textAlign: 'center'
+            }}>
+              Создать видеокурс
+            </Text>
+          </TouchableOpacity>
         </View>
+
+        <View style={{
+          alignItems: 'center',
+          marginBottom: 30
+        }}>
+          <TouchableOpacity onPress={() => navigation.navigate('ListNewsAdmin', {
+            "user_id": userInfo.user_id
+          })}>
+            <Text style={{
+              fontSize: 18,
+              borderBottomWidth: 1,
+              borderColor: 'black'
+            }}>
+              Список новостей от школы
+            </Text>
+          </TouchableOpacity>
+        </View>
+
       </View>
       <View style={{
         flex: 1,

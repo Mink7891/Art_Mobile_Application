@@ -5,6 +5,7 @@ const initialState = {
   isFetching: false,
   isAuth: false,
   isError: false,
+  user_rating: 0,
   userInfo: {},
   token: '',
   errorMessage: '',
@@ -64,6 +65,9 @@ export const authSlice = createSlice({
       state.isAuth = false;
       state.token = '';
       state.userInfo = ''
+    },
+    updateRate: (state) => {
+      state.user_rating++;
     }
   },
   extraReducers: (builder) => {
@@ -105,4 +109,4 @@ export const authSlice = createSlice({
 
 
 export default authSlice;
-export const {clearErrorMessage, logOut} = authSlice.actions;
+export const {clearErrorMessage, updateRate, logOut} = authSlice.actions;

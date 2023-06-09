@@ -4,14 +4,15 @@ import { StyleSheet, Text, View, Dimensions, ImageBackground, Button } from 'rea
 import { answerByUser, fetchData } from '../../../API/tasks.api';
 
 import QuizQuestion from './QuizQuestion';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {updateRate} from "../../../store/slice/authSlice";
 
 
 
 
 
 export default function Quiz() {
-
+  const dispatch = useDispatch();
   const [quiz,setQuiz] = useState(null)
   const [step,setStep] = useState(0)
   const [nextButton, setNextButton] = useState(false)
@@ -34,7 +35,7 @@ export default function Quiz() {
     setAnswer(true)
     setChooseButton(index)
     if (quiz[step].task_correct_answer == index) {
-      
+      dispatch(updateRate(1))
       await answerByUser(quiz[step].task_id, index, accessToken)
       
     }

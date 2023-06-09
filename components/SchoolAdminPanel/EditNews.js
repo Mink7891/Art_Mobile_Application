@@ -1,72 +1,45 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text, TextInput, TouchableOpacity, Image, Alert} from "react-native";
-import * as ImagePicker from 'expo-image-picker';
+import {View, Text, TextInput, Image, TouchableOpacity, StyleSheet, ScrollView, Alert} from "react-native";
+import React, {useState} from "react";
 import $api from "../../http";
 
+const EditNews = ({route}) => {
+  const news = route.params.news;
+  const [newsTitle, setNewsTitle] = useState(news.news_title);
+  const [newsDesc, setNewsDesc] = useState(news.news_desc);
 
-const AddNews = ({route}) => {
-  const news_auth = route.params?.auth_id;
-  const [newsTitle, setNewsTitle] = useState('Test test test test test');
-  const [newsDesc, setNewsDesc] = useState('TestDesc TestDesc TestDesc TestDesc TestDesc TestDescTestDesc TestDescTestDescTestDescTestDescTestDesc TestDescTestDescTestDescTestDesc TestDesc TestDesc м TestDesc TestDesc м мм');
-
-  const [newsImg, setNewsImg] = useState('');
+  const [newsImg, setNewsImg] = useState(news.news_img);
   const [newsLinkImg, setNewsLinkImg] = useState('');
 
-  const [newsDate, setNewsDate] = useState(new Date().toLocaleString());
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-
-  const createNews = async () => {
+  const editNews = async () => {
     try {
       setIsLoading(true);
-      const data = new FormData();
-      data.append("image", {uri: newsImg, name: `${Date.now()}.jpg`, type: 'image/jpg'})
-      const uploadImage = await $api.post('/upload', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then((res) => setNewsLinkImg(res.data.url))
-
-      const response = await $api.post('/news/create', {
-        user_id: news_auth,
-        news_title: newsTitle,
-        news_desc: newsDesc,
-        news_img: newsLinkImg
+      const response = await $api.put('news/update', {
+        'news_id': news?.news_id,
+        'news_title': newsTitle,
+        'news_desc': newsDesc,
       })
-      return successfullyAdd();
+      return successfullyEdit();
     } catch (e) {
-      setError(e);
-      console.log(e.response.data)
+      console.log(e.response.data);
+      setError(e.response.data);
     } finally {
       setIsLoading(false);
     }
   }
 
-  const successfullyAdd = () => {
-    Alert.alert('Новость успешно создана', '', [
+  const successfullyEdit = () => {
+    Alert.alert('Новость успешно изменена', '', [
       {
-        text: 'Отлично'
+        text: 'Ок'
       }
     ])
   }
 
-  const selectImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      console.log(result.assets[0]);
-      setNewsImg(result.assets[0].uri);
-    }
-  }
-
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.content}>
         <View style={{...styles.TextInputForm, marginBottom: 10}}>
           <Text style={{
@@ -128,14 +101,14 @@ const AddNews = ({route}) => {
           }
 
 
-          <TouchableOpacity onPress={selectImage} style={{marginTop: 20}}>
-            <Text style={{
-              fontSize: 20,
-              color: 'blue',
-            }}>
-              Загрузить изображение
-            </Text>
-          </TouchableOpacity>
+          {/*  <TouchableOpacity onPress={selectImage} style={{marginTop: 20}}>*/}
+          {/*    <Text style={{*/}
+          {/*      fontSize: 20,*/}
+          {/*      color: 'blue',*/}
+          {/*    }}>*/}
+          {/*      Загрузить изображение*/}
+          {/*    </Text>*/}
+          {/*  </TouchableOpacity>*/}
         </View>
 
         <View style={{...styles.TextInputForm, marginBottom: 10}}>
@@ -147,32 +120,32 @@ const AddNews = ({route}) => {
             Дата:
           </Text>
           <Text>
-            {newsDate}
+            {news.news_date}
           </Text>
         </View>
 
         <View style={{
           marginTop: 30
         }}>
-          <TouchableOpacity onPress={createNews} style={{
+          <TouchableOpacity style={{
             backgroundColor: 'black',
             padding: 6,
             width: 150,
             borderRadius: 10
-          }}>
+          }} onPress={editNews}>
             <Text style={{
               fontSize: 18,
               color: 'white',
               textAlign: 'center',
               fontWeight: 'bold'
             }}>
-              Создать новость!
+              Применить изменения
             </Text>
           </TouchableOpacity>
         </View>
 
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -190,4 +163,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AddNews;
+export default EditNews;

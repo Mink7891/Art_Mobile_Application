@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 
 const Header = () => {
   const navigation = useNavigation();
-  const {userInfo} = useSelector((state) => state.auth);
+  const {user_rating} = useSelector((state) => state.auth);
 
   return (
     <View style={styles.container}>
@@ -20,7 +20,7 @@ const Header = () => {
             />
           </View>
           <View>
-            <Text style={{fontSize: 18}}>Ваш рейтинг: {userInfo?.user_rating}</Text>
+            <Text style={{fontSize: 18}}>Ваш рейтинг: {user_rating}</Text>
           </View>
         </SafeAreaView>
       </View>
