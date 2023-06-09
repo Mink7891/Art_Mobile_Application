@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect , useState} from 'react';
 import { StyleSheet, Text, View, Dimensions, ImageBackground, Button } from 'react-native';
-import { answerByUser, fetchData } from '../../../API/tasks.api';
+import { answerByUser, fetchAchievementAdd, fetchData } from '../../../API/tasks.api';
 
 import QuizQuestion from './QuizQuestion';
 import {useDispatch, useSelector} from 'react-redux';
@@ -75,6 +75,21 @@ export default function Quiz() {
   },[])
 
 
+
+  useEffect(() => {
+
+    async function achievementAdd() {
+      if (step) {
+        if (step == quiz.length) {
+         
+          await fetchAchievementAdd(accessToken, 2)
+        }
+      }
+    }
+    achievementAdd()
+    
+
+  }, [step])
 
 
 

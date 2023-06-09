@@ -1,22 +1,33 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, Button, Image, Text, View, ImageBackground, ScrollView, TouchableOpacity} from "react-native";
-import {useDispatch, useSelector} from "react-redux";
-import {logOut} from "../../store/slice/authSlice";
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Button, Image, Text, View, ImageBackground, ScrollView, TouchableOpacity } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../../store/slice/authSlice";
 import Loader from "../../News/Loader";
 import LinePersonInformation from "../LinePersonInformation";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+import LinePersonAchievement from '../LinePersonAchievement';
+import { fetchAchievementsUser } from '../../API/tasks.api';
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const {userInfo, isFetching, token, isError, isAuth} = useSelector((state) => state.auth);
+  const { userInfo, isFetching, token, isError, isAuth } = useSelector((state) => state.auth);
+ 
+  
+  
 
   const logOutButton = () => {
     dispatch(logOut());
   }
 
+
+
+
+
+
   return (
     <ScrollView style={styles.container}>
-      {isFetching && <Loader/>}
+      
+      {isFetching && <Loader />}
       <View style={styles.header}>
         <ImageBackground
           source={require('../../assets/patternBackground.png')}
@@ -24,7 +35,7 @@ const Profile = () => {
           style={styles.imageBackground}
         >
           <View style={styles.containerAvatar}>
-            <Image style={styles.avatarImg} source={{uri: userInfo?.user_photo}}/>
+            <Image style={styles.avatarImg} source={{ uri: userInfo?.user_photo }} />
           </View>
 
           <View style={styles.containerTitle}>
@@ -65,10 +76,13 @@ const Profile = () => {
           info={userInfo?.user_education}
         />
 
+        <LinePersonAchievement
+          label='Достижения'
+        />
 
         <View style={styles.containerButton}>
           <TouchableOpacity style={styles.exitButton} onPress={logOutButton}>
-            <Text style={{color: 'white'}}>
+            <Text style={{ color: 'white' }}>
               Выйти
             </Text>
           </TouchableOpacity>
@@ -120,7 +134,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: 'white',
     textShadowColor: 'rgba(23,23,23,0.75)',
-    textShadowOffset: {width: -1, height: 1},
+    textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
   },
   textScore: {
@@ -128,7 +142,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     textShadowColor: 'rgba(23,23,23,0.75)',
-    textShadowOffset: {width: -1, height: 0},
+    textShadowOffset: { width: -1, height: 0 },
     textShadowRadius: 10,
   },
   content: {

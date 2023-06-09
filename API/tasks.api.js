@@ -6,6 +6,8 @@ import axios from "axios";
 const API_URL = 'http://46.243.227.254:8080/tasks/quiz';
 const ANSWER_QUIZ_URL = 'http://46.243.227.254:8080/tasks/quiz'
 const VIDEOS_TASK_URL = "http://46.243.227.254:8080/tasks/videos"
+const ACHIEVEMENT_GET = "http://46.243.227.254:8080/users/achievements"
+const ACHIEVEMENT_ADD = "http://46.243.227.254:8080/tasks/achievement"
 
 
 
@@ -40,4 +42,20 @@ export const fetchVideosContent = (token) => {
       console.error('Error fetching data:', error);
       throw error;
     });
+}
+
+
+export const fetchAchievementsUser = (token) => {
+  return fetch(ACHIEVEMENT_GET , {method: 'GET',headers: {Authorization: `Bearer ${token}`, }})
+    .then(response => response.json())
+    .catch(error => {
+      console.error('Error fetching data:', error);
+      throw error;
+    });
+}
+
+
+
+export const fetchAchievementAdd = (token,achievement_id) => {
+    return axios.post(ACHIEVEMENT_ADD, {"achievement_id" : achievement_id}, {headers: {"Authorization" : `Bearer ${token}`}})
 }

@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react'
 import {ImageBackground, Text, View, StyleSheet, Dimensions, TouchableOpacity, Button} from 'react-native';
 import {Audio, Video, ResizeMode} from 'expo-av';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {answerByUserVideo, fetchVideosContent} from '../../../API/tasks.api';
+import {answerByUserVideo, fetchAchievementAdd, fetchVideosContent} from '../../../API/tasks.api';
 import VideoContainer from './VideoContainer';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateRate} from "../../../store/slice/authSlice";
@@ -50,6 +50,13 @@ export default function VideoGame() {
         const fetchedData = await fetchVideosContent(accessToken);
         setVideoList(fetchedData)
         setLoadingVideo(false)
+
+        if (step == videoList?.length) {
+            
+            await fetchAchievementAdd(accessToken,3)
+        }
+
+
 
       } catch (error) {
         console.log(error)

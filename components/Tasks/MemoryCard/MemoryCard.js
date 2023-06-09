@@ -109,7 +109,7 @@ export default function MemoryCard() {
             {gameOver &&
                 <View style={styles.gameOverContainer}>
                     <View style={styles.gameOver}>
-                        <Text style={styles.gameOverText}>Ты выйграл</Text>
+                        <Text style={styles.gameOverText}>Ваш счёт : {score}</Text>
                         <Text style={styles.turns}>Количество ходов : {turns}</Text>
                         <Button title='Рестарт' style={styles.gameOverBtn} onPress={restart}></Button>
                     </View>
