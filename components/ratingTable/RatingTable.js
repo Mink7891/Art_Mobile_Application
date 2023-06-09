@@ -116,7 +116,7 @@ const RatingTable = () => {
                     ? <Text style={{
                       ...styles.text,
                       color: 'rgb(32,220,5)',
-                      fontWeight: '450'
+                      fontWeight: '500'
                     }}>{`${item?.user_name} (Вы)`}</Text>
                     : <Text style={styles.text}>{item?.user_name}</Text>
                 }
