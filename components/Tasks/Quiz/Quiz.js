@@ -1,45 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { useEffect , useState} from 'react';
-import { StyleSheet, Text, View, Dimensions, ImageBackground, Button } from 'react-native';
-import { answerByUser, fetchAchievementAdd, fetchData } from '../../../API/tasks.api';
+import {StatusBar} from 'expo-status-bar';
+import {useEffect, useState} from 'react';
+import {StyleSheet, Text, View, Dimensions, ImageBackground, Button} from 'react-native';
+import {answerByUser, fetchAchievementAdd, fetchData} from '../../../API/tasks.api';
 
 import QuizQuestion from './QuizQuestion';
 import {useDispatch, useSelector} from 'react-redux';
-import {updateRate} from "../../../store/slice/authSlice";
-
-
-
+import FinishElement from "../FinishElement";
 
 
 export default function Quiz() {
   const dispatch = useDispatch();
-  const [quiz,setQuiz] = useState(null)
-  const [step,setStep] = useState(0)
+  const [quiz, setQuiz] = useState(null)
+  const [step, setStep] = useState(0)
   const [nextButton, setNextButton] = useState(false)
   const [answer, setAnswer] = useState(false)
-  const [disable,setDisable] = useState(false)
-  const [chooseButton,setChooseButton] = useState(-1)  
+  const [score, setScore] = useState(0);
+  const [disable, setDisable] = useState(false)
+  const [chooseButton, setChooseButton] = useState(-1)
   const {accessToken} = useSelector((state) => state.auth.userInfo);
 
   const shuffle = (array) => {
     return array.sort(() => Math.random() - 0.5)
   }
 
-  
-
-
 
   const onClickVariant = async (index) => {
-    
+
     setDisable(true)
     setAnswer(true)
     setChooseButton(index)
-    if (quiz[step].task_correct_answer == index) {
+    if (quiz[step].task_correct_answer === index) {
+      setScore(prevState => prevState + 1);
       await answerByUser(quiz[step].task_id, index, accessToken)
-      
-      
-    }
-    else {
+    } else {
       console.log("Неправильно")
     }
     setNextButton(true)
@@ -53,27 +46,19 @@ export default function Quiz() {
   }
 
   useEffect(() => {
-    const getData = async() => {
+    const getData = async () => {
       try {
         const fetchedData = await fetchData(accessToken);
         setQuiz(shuffle(fetchedData))
-        
-       
-        
-        
-        
-      }
-      catch (error) {
+
+      } catch (error) {
         console.log(error)
       }
 
     }
-
-
     getData()
 
-  },[])
-
+  }, [])
 
 
   useEffect(() => {
@@ -81,69 +66,72 @@ export default function Quiz() {
     async function achievementAdd() {
       if (step) {
         if (step == quiz.length) {
-         
+
           await fetchAchievementAdd(accessToken, 2)
         }
       }
     }
+
     achievementAdd()
-    
+
 
   }, [step])
 
-
-
+  console.log(score);
 
   return (
 
 
     <ImageBackground
-    source={require('../../../assets/QuizBG.png')} 
-    style={styles.imageBackground}
-    resizeMode="cover"
-  >
-    <View style={styles.variants_container}>
-      {quiz ? 
-        step != quiz.length ? <QuizQuestion chooseButton={chooseButton} isDisable={disable} onClickVariant={onClickVariant} question={quiz[step]}/> : <Text>Вопросы закончились. В будущем их будет больше</Text>: <Text>Загрузка...</Text>}
-      {answer ? <Text style={styles.answerContainer}>{quiz[step].task_correct_desc}</Text> : <></>}
-      {nextButton ? <Button title='Следующий вопрос' onPress={() => nextQuestion()}></Button> : <></>}
-      <StatusBar style="auto" />
-    </View>
+      source={require('../../../assets/QuizBG.png')}
+      style={styles.imageBackground}
+      resizeMode="cover"
+    >
+      <View style={styles.variants_container}>
+        {quiz
+          ? step !== quiz.length
+            ? <QuizQuestion chooseButton={chooseButton} isDisable={disable} onClickVariant={onClickVariant}
+                            question={quiz[step]}/>
+            : <FinishElement countQuestion={step} result={score} />
+          : <Text>Загрузка...</Text>}
+        {answer ? <Text style={styles.answerContainer}>{quiz[step].task_correct_desc}</Text> : <></>}
+        {nextButton ? <Button title='Следующий вопрос' onPress={() => nextQuestion()}></Button> : <></>}
+        <StatusBar style="auto"/>
+      </View>
 
 
-  </ImageBackground>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
- 
-  variants_container : {
-    justifyContent : 'center',
-    textAlign : 'center',
-    alignItems : 'center'
 
-    },
+  variants_container: {
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center'
+
+  },
 
   answer_container: {
-    marginTop : 25,
-    backgroundColor : '#fff',
-   
-   
-    
+    marginTop: 25,
+    backgroundColor: '#fff',
+
+
   },
 
 
   imageBackground: {
     alignItems: 'center',
     justifyContent: 'center',
-    width : '100%',
-    height : '100%'
+    width: '100%',
+    height: '100%'
   },
 
 
-  answerContainer : {
-    fontFamily : 'Calibri',
-    margin : 10,
-    marginBottom : 20
+  answerContainer: {
+    fontFamily: 'Calibri',
+    margin: 10,
+    marginBottom: 20
   }
 });

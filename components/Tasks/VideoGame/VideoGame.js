@@ -1,10 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {ImageBackground, Text, View, StyleSheet, Dimensions, TouchableOpacity, Button} from 'react-native';
-import {Audio, Video, ResizeMode} from 'expo-av';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {Audio} from 'expo-av';
 import {answerByUserVideo, fetchVideosContent} from '../../../API/tasks.api';
 import VideoContainer from './VideoContainer';
 import {useDispatch, useSelector} from 'react-redux';
+import FinishElement from "../FinishElement";
+import {fetchAchievementAdd} from "../../../API/tasks.api";
 
 
 export default function VideoGame() {
@@ -22,6 +23,7 @@ export default function VideoGame() {
   const [pressButton, setPressButton] = useState(-1)
   const [videoIsMuted, setVideoIsMuted] = useState(true)
   const [activeButton, setActiveButton] = useState(false)
+  const [score, setScore] = useState(0);
   const [winner, setWinner] = useState(false)
   const [nextQuestion, setNextQuestion] = useState(false)
   const [wrongAnswer, setWrongAnswer] = useState(false)
@@ -34,7 +36,7 @@ export default function VideoGame() {
 
     setPressButton(i)
     setActiveButton(true)
-    if (soundRef.current != undefined) {
+    if (soundRef.current !== undefined) {
       soundRef.current.unloadAsync()
     }
     const {sound} = await Audio.Sound.createAsync({uri: music})
@@ -50,7 +52,7 @@ export default function VideoGame() {
         setVideoList(fetchedData)
         setLoadingVideo(false)
 
-        if (step == videoList?.length) {
+        if (step === videoList?.length) {
             
             await fetchAchievementAdd(accessToken,3)
         }
@@ -67,8 +69,8 @@ export default function VideoGame() {
 
 
   const handleStatusVideo = (status) => {
-    if (video && pressButton == -1) {
-      if (status.positionMillis >= 5000 && status.isPlaying == true) {
+    if (video && pressButton === -1) {
+      if (status.positionMillis >= 5000 && status.isPlaying === true) {
         video.current.pauseAsync()
         status.positionMillis = 0
         setAnswersVisible(true)
@@ -78,7 +80,6 @@ export default function VideoGame() {
 
 
   const nextButton = () => {
-
     setStep(step + 1)
     setWinner(false)
     setDisableButtons(false)
@@ -87,13 +88,13 @@ export default function VideoGame() {
     setNextQuestion(false)
     setWrongAnswer(false)
     setPressButton(-1)
-
   }
 
 
   const answerButton = async (index) => {
     setDisableButtons(true)
-    if (index == videoList[step].currentanswer) {
+    if (index === videoList[step].currentanswer) {
+      setScore(prevState => prevState + 1);
       await answerByUserVideo(videoList[step].task_id, index, accessToken, accessToken)
       soundRef.current.pauseAsync()
       setAnswersVisible(false)
@@ -115,7 +116,7 @@ export default function VideoGame() {
                      source={require('../../../assets/videoGameBG.png')}>
 
       <View style={styles.taskContainer}>
-        {loadingVideo ? <Text>Загрузка...</Text> : step != videoList.length ? (
+        {loadingVideo ? <Text>Загрузка...</Text> : step !== videoList.length ? (
           <View style={styles.taskContainer}>
             {winner ?
               <Text style={styles.praises}>{praises[(Math.floor(Math.random() * praises.length))]}</Text> : <></>}
@@ -126,7 +127,7 @@ export default function VideoGame() {
             {video.current ? answersVisible ?
               <View style={styles.answersContainer}>{videoList[step].audioclips.map((music, i) => <TouchableOpacity
                 disabled={disableButtons} activeOpacity={1}
-                style={wrongAnswer && i == pressButton ? styles.wrongContainer : pressButton == i ? styles.selectButton : styles.unSelectButton}
+                style={wrongAnswer && i === pressButton ? styles.wrongContainer : pressButton === i ? styles.selectButton : styles.unSelectButton}
                 key={music} onPress={() => soundPlay(music, i)}><Text
                 style={styles.answer}>Вариант {i + 1}</Text></TouchableOpacity>)}
               </View> : <></> : <></>}
@@ -138,7 +139,7 @@ export default function VideoGame() {
             {nextQuestion ? <View style={styles.nextQuestion}><Button title='Следующее задание' onPress={() => {
               nextButton()
             }}></Button></View> : <></>}
-          </View>) : <Text>Видео закончились</Text>}
+          </View>) : <FinishElement countQuestion={step} result={score}/>}
 
       </View>
 
