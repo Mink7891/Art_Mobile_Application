@@ -44,24 +44,29 @@ const RatingTable = () => {
             justifyContent: 'center',
             top: 0,
             left: 0,
-            backgroundColor: 'rgba(0,0,0,0.48)'
-          }}>
+            backgroundColor: 'rgba(0,0,0,0.1)',
+            
+            
+}}>
             <Loader/>
           </View>
           : null
       }
       <View style={{
         flex: 1,
-        margin: 20,
-        borderWidth: 3,
+       
+        margin: 10,
+        borderWidth: 1,
         padding: 10,
         borderRadius: 24,
-        backgroundColor: 'rgba(0,0,0,0.39)',
-        borderColor: 'rgb(255,255,255)',
+        backgroundColor: 'rgba(200,200,200,0.39)',
+        borderColor: 'black',
+        
       }}>
         <View style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
+          
         }}>
           {/*{*/}
           {/*  isLoading*/}
@@ -92,16 +97,7 @@ const RatingTable = () => {
           data={users}
           style={styles.listStyle}
           renderItem={({item, index}) => (
-            <View style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: 10,
-              borderBottomColor: 'rgb(255,255,255)',
-              borderBottomWidth: 3,
-              paddingRight: 20,
-              paddingLeft: 20,
-            }}>
+            <View style={styles.line}>
               <View>
                 <Text style={styles.text}>
                   {index + 1}
@@ -138,10 +134,25 @@ const styles = StyleSheet.create({
   listStyle: {
     flex: 1,
     flexDirection: 'column',
+    
   },
   text: {
-    color: 'white',
+    color: 'black',
     fontSize: 15,
+    
+  },
+  line:{
+    flex: 1,
+    
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 6,
+    backgroundColor: 'white',
+    borderRadius: 12,
+    marginTop: 10,
+    
+    paddingRight: 20,
+    paddingLeft: 20,
   }
 })
 
