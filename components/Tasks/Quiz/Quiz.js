@@ -65,23 +65,16 @@ export default function Quiz() {
 
     async function achievementAdd() {
       if (step) {
-        if (step == quiz.length) {
-
+        if (score === quiz.length) {
           await fetchAchievementAdd(accessToken, 2)
         }
       }
     }
-
     achievementAdd()
-
-
   }, [step])
 
-  console.log(score);
 
   return (
-
-
     <ImageBackground
       source={require('../../../assets/QuizBG.png')}
       style={styles.imageBackground}

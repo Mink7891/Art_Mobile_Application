@@ -52,17 +52,13 @@ export default function VideoGame() {
         setVideoList(fetchedData)
         setLoadingVideo(false)
 
-        if (step === videoList?.length) {
-            
+        if (score === videoList?.length) {
             await fetchAchievementAdd(accessToken,3)
         }
-
-
 
       } catch (error) {
         console.log(error)
       }
-
     }
     getData()
   }, [step])
