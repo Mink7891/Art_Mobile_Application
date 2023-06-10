@@ -6,6 +6,7 @@ import {answerByUser, fetchAchievementAdd, fetchData} from '../../../API/tasks.a
 import QuizQuestion from './QuizQuestion';
 import {useDispatch, useSelector} from 'react-redux';
 import FinishElement from "../FinishElement";
+import {updateRate} from "../../../store/slice/authSlice";
 
 
 export default function Quiz() {
@@ -26,13 +27,16 @@ export default function Quiz() {
 
 
   const onClickVariant = async (index) => {
-
     setDisable(true)
     setAnswer(true)
     setChooseButton(index)
     if (quiz[step].task_correct_answer === index) {
       setScore(prevState => prevState + 1);
-      await answerByUser(quiz[step].task_id, index, accessToken)
+      const response = await answerByUser(quiz[step].task_id, index, accessToken);
+      if (!response.data[0]?.new_ans) {
+        console.log('Update rate');
+        await dispatch(updateRate(1));
+      }
     } else {
       console.log("Неправильно")
     }

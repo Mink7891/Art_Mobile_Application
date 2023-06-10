@@ -6,6 +6,7 @@ import VideoContainer from './VideoContainer';
 import {useDispatch, useSelector} from 'react-redux';
 import FinishElement from "../FinishElement";
 import {fetchAchievementAdd} from "../../../API/tasks.api";
+import {updateRate} from "../../../store/slice/authSlice";
 
 
 export default function VideoGame() {
@@ -91,7 +92,10 @@ export default function VideoGame() {
     setDisableButtons(true)
     if (index === videoList[step].currentanswer) {
       setScore(prevState => prevState + 1);
-      await answerByUserVideo(videoList[step].task_id, index, accessToken, accessToken)
+      const response = await answerByUserVideo(videoList[step].task_id, index, accessToken, accessToken)
+      if (!response.data[0]?.new_ans) {
+        dispatch(updateRate(2));
+      }
       soundRef.current.pauseAsync()
       setAnswersVisible(false)
       setVideoIsMuted(false)
