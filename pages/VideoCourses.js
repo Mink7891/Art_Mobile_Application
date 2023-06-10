@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Image, TouchableOpacity, Text, Linking, ImageBackground, ScrollView} from 'react-native';
+import { useSelector } from 'react-redux';
 import styles from './VideoCoursesStyles';
+
+//викторина - 1 вопрос - 1 балл всего 8
+//вспомни фразу 1 вопрос - 2 балла всего 6
 
 
 const videos = [
   {
     id: 'video1',
+    rating: 0,
     title: 'Хореографический отдел',
     description: 'ГБУДО г. Москвы ДШИ Вдохновение',
     category: 'Хореография',
@@ -15,6 +20,7 @@ const videos = [
   },
   {
     id: 'video2',
+    rating: 0,
     title: 'Nick Johnston - Weakened by Winter.',
     description: 'Ольга Крыскина',
     category: 'Гитара',
@@ -24,6 +30,7 @@ const videos = [
   },
   {
     id: 'video3',
+    rating: 0,
     title: 'Клинг Елизавета',
     description: 'Детская школа искусств имени Н.Н. Калинина',
     category: 'Пианино',
@@ -33,6 +40,7 @@ const videos = [
   },
   {
     id: 'video4',
+    rating: 0,
     title: 'Диана Субботина',
     description: 'А.Комаровский - Русская песня (скрипка)',
     category: 'Скрипка',
@@ -42,6 +50,7 @@ const videos = [
   },
   {
     id: 'video5',
+    rating: 0,
     title: 'Научу тебя играть на гитаре за 10 минут',
     description: 'Экспресс курс по осноам игры на гитаре',
     category: 'Гитара',
@@ -51,6 +60,7 @@ const videos = [
   },
   {
     id: 'video6',
+    rating: 0,
     title: 'Гала-концерт Городского конкурса «Ритмы Вселенной»',
     description: 'Открытый фестиваль «Поколение созидателей»',
     category: 'Хореография',
@@ -60,6 +70,7 @@ const videos = [
   },
   {
     id: 'video7',
+    rating: 6,
     title: 'Праздничный концерт к Новому 2022 году',
     description: 'ГБОУДО им. А.В. Косарева',
     category: 'Хореография',
@@ -69,6 +80,7 @@ const videos = [
   },
   {
     id: 'video8',
+    rating: 0,
     title: '«Весенний букет»',
     description: 'Московская музыкальная школа им. Н.С. Голованова',
     category: 'Пианино',
@@ -78,6 +90,7 @@ const videos = [
   },
   {
     id: 'video9',
+    rating: 6,
     title: 'Отчетный концерт отделения фортепиано',
     description: 'Московская музыкальная школа им. Н.С. Голованова',
     category: 'Пианино',
@@ -87,6 +100,7 @@ const videos = [
   },
   {
     id: 'video10',
+    rating: 0,
     title: 'Выступление ДК Салют. Э.Меццакапо Болеро "Толедо"',
     description: 'Московская школа искусств им. Л.Н. Оборина',
     category: 'Скрипка',
@@ -96,6 +110,7 @@ const videos = [
   },
   {
     id: 'video11',
+    rating: 6,
     title: 'Эвита Корчинская. Выступление на конкурсе',
     description: 'Ф.Давид "Этюд", Ф.Крейслер "Сицилиана и Ригодон" 20.03.22',
     category: 'Скрипка',
@@ -108,6 +123,9 @@ const videos = [
 ];
 
 const VideoCourses = () => {
+  const {user_rating} = useSelector((state) => state.auth);
+
+  console.log(user_rating)
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleVideoPress = (url) => {
@@ -123,9 +141,9 @@ const VideoCourses = () => {
     }
   };
 
-  const filteredVideos = selectedCategory
-    ? videos.filter((video) => video.category === selectedCategory)
-    : videos;
+    const filteredVideos = selectedCategory
+    ? videos.filter((video) => video.category === selectedCategory && video.rating <= user_rating)
+    : videos.filter((video) => video.rating <=user_rating);
 
   return (
 
