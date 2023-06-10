@@ -50,8 +50,6 @@ const RatingTable = () => {
           </View>
           : null
       }
-
-
       <View style={{
         flex: 1,
         margin: 20,

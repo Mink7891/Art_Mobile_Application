@@ -11,6 +11,7 @@ const InfoNews = ({route, navigation}) => {
   const screenDimensions = Dimensions.get('screen');
 
   useEffect(() => {
+    if (!data.news_desc.includes('http')) return setDesc(data.news_desc)
     const sliceStr = data.news_desc.split('http')
     setLink(`http${sliceStr.pop()}`);
     setDesc(sliceStr)
