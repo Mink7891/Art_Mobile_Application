@@ -14,8 +14,6 @@ const  Train = ({navigation})  => {
   
   const [line, setLine] = useState(5000)
 
-  
-
   const [age, setAge] = useState([
     { 
         "year": 'Первобытное искусство', 
@@ -51,7 +49,7 @@ const  Train = ({navigation})  => {
           
           <View style={[styles.line, { width: line }]}>
 
-            <View style={[styles.inputLine, { width: user_rating * 23 }]}></View>
+            <View style={[styles.inputLine, { width: user_rating * 45 }]}></View>
             {age.map((item, index) => {
               return <CircleTask key={item.year} navigation={navigation} age={item.year} index={index} rate={item.rate} text={item.text} title={item.title} userRate={user_rating} img={item.img}></CircleTask>
             })}
