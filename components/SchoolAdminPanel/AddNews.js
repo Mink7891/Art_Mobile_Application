@@ -6,8 +6,8 @@ import $api from "../../http";
 
 const AddNews = ({route}) => {
   const news_auth = route.params?.auth_id;
-  const [newsTitle, setNewsTitle] = useState('Test test test test test');
-  const [newsDesc, setNewsDesc] = useState('TestDesc TestDesc TestDesc TestDesc TestDesc TestDescTestDesc TestDescTestDescTestDescTestDescTestDesc TestDescTestDescTestDescTestDesc TestDesc TestDesc м TestDesc TestDesc м мм');
+  const [newsTitle, setNewsTitle] = useState('');
+  const [newsDesc, setNewsDesc] = useState('');
 
   const [newsImg, setNewsImg] = useState('');
   const [newsLinkImg, setNewsLinkImg] = useState('');
