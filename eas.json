@@ -2,14 +2,12 @@
   "build": {
     "preview": {
       "android": {
-        "buildType": "apk",
-        "developmentClient": true
+        "buildType": "apk"
       }
     },
     "preview2": {
       "android": {
-        "gradleCommand": ":app:assembleRelease",
-        "buildType": "apk"
+        "gradleCommand": ":app:assembleRelease"
       }
     },
     "preview3": {
