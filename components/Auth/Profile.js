@@ -11,17 +11,11 @@ import LinePersonAchievement from "../LinePersonAchievement.js"
 const Profile = () => {
   const dispatch = useDispatch();
   const { userInfo, isFetching, token, isError, isAuth } = useSelector((state) => state.auth);
- 
-  
-  
+
 
   const logOutButton = () => {
     dispatch(logOut());
   }
-
-
-
-
 
 
   return (
@@ -75,6 +69,7 @@ const Profile = () => {
           label='Образование'
           info={userInfo?.user_education}
         />
+
 
         <LinePersonAchievement
           label='Достижения'

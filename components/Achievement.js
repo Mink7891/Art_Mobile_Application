@@ -4,10 +4,7 @@ import { View, Image, StyleSheet, Text, Modal, TouchableOpacity, TouchableWithou
 
 
 export default function Achievement({ achievement }) {
-
-
     const [modalVisible, setModalVisible] = useState(false);
-
 
     const openModal = () => {
         setModalVisible(true);
@@ -22,7 +19,7 @@ export default function Achievement({ achievement }) {
     return (
 
         <View style={styles.container}>
-            {console.log(achievement)}
+
             <View>
                 {/* <Text>{achievement.achievement_title}</Text> */}
             </View>
