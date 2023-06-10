@@ -11,7 +11,7 @@ import LinePersonAchievement from "../LinePersonAchievement.js"
 const Profile = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { userInfo, isFetching, token, isError, isAuth } = useSelector((state) => state.auth);
+  const { userInfo, isFetching, user_rating } = useSelector((state) => state.auth);
 
 
   const logOutButton = () => {
@@ -38,12 +38,14 @@ const Profile = () => {
               Добро пожаловать, {userInfo?.user_name}
             </Text>
             <Text style={styles.textScore}>
-              Ваш рейтинг: {userInfo?.user_rating}
+              Ваш рейтинг: {user_rating}
             </Text>
 
             <TouchableOpacity style={{
               marginTop: 15
-            }} onPress={() => navigation.navigate('Train')}>
+            }} onPress={() => navigation.navigate('Train', {
+              rate: user_rating
+            })}>
               <Text style={{
                 fontSize: 20,
                 color: 'white',

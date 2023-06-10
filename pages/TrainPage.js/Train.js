@@ -8,10 +8,8 @@ import { useSelector } from 'react-redux';
 
 
 
-const  Train = ({navigation})  => {
-
-  const {user_rating} = useSelector(state => state.auth.userInfo);
-  
+const  Train = ({route, navigation})  => {
+  const rate = route.params.rate;
   const [line, setLine] = useState(5000)
 
   const [age, setAge] = useState([
@@ -49,9 +47,9 @@ const  Train = ({navigation})  => {
           
           <View style={[styles.line, { width: line }]}>
 
-            <View style={[styles.inputLine, { width: user_rating * 45 }]}></View>
+            <View style={[styles.inputLine, { width: rate * 45 }]}></View>
             {age.map((item, index) => {
-              return <CircleTask key={item.year} navigation={navigation} age={item.year} index={index} rate={item.rate} text={item.text} title={item.title} userRate={user_rating} img={item.img}></CircleTask>
+              return <CircleTask key={item.year} navigation={navigation} age={item.year} index={index} rate={item.rate} text={item.text} title={item.title} userRate={rate} img={item.img}></CircleTask>
             })}
 
           </View>

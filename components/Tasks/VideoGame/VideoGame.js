@@ -93,7 +93,7 @@ export default function VideoGame() {
     if (index === videoList[step].currentanswer) {
       setScore(prevState => prevState + 1);
       const response = await answerByUserVideo(videoList[step].task_id, index, accessToken, accessToken)
-      if (!response.data[0]?.new_ans) {
+      if (response.data?.new_ans) {
         dispatch(updateRate(2));
       }
       soundRef.current.pauseAsync()

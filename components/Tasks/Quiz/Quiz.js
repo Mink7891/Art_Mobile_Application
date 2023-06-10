@@ -33,7 +33,7 @@ export default function Quiz() {
     if (quiz[step].task_correct_answer === index) {
       setScore(prevState => prevState + 1);
       const response = await answerByUser(quiz[step].task_id, index, accessToken);
-      if (!response.data[0]?.new_ans) {
+      if (response.data?.new_ans) {
         console.log('Update rate');
         await dispatch(updateRate(1));
       }
