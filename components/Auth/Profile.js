@@ -10,6 +10,7 @@ import LinePersonAchievement from "../LinePersonAchievement.js"
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const { userInfo, isFetching, token, isError, isAuth } = useSelector((state) => state.auth);
 
 
@@ -39,6 +40,20 @@ const Profile = () => {
             <Text style={styles.textScore}>
               Ваш рейтинг: {userInfo?.user_rating}
             </Text>
+
+            <TouchableOpacity style={{
+              marginTop: 15
+            }} onPress={() => navigation.navigate('Train')}>
+              <Text style={{
+                fontSize: 20,
+                color: 'white',
+                backgroundColor: 'rgba(208,108,108,0.64)',
+                padding: 5,
+                borderRadius: 10
+              }}>
+                🚂 Поезд времени
+              </Text>
+            </TouchableOpacity>
           </View>
         </ImageBackground>
       </View>
@@ -55,20 +70,20 @@ const Profile = () => {
           info={userInfo?.user_email}
         />
 
-        <LinePersonInformation
-          label='Возраст'
-          info={userInfo?.user_age}
-        />
+        {/*<LinePersonInformation*/}
+        {/*  label='Возраст'*/}
+        {/*  info={userInfo?.user_age}*/}
+        {/*/>*/}
 
-        <LinePersonInformation
-          label='Телефон'
-          info={userInfo?.user_phone}
-        />
+        {/*<LinePersonInformation*/}
+        {/*  label='Телефон'*/}
+        {/*  info={userInfo?.user_phone}*/}
+        {/*/>*/}
 
-        <LinePersonInformation
-          label='Образование'
-          info={userInfo?.user_education}
-        />
+        {/*<LinePersonInformation*/}
+        {/*  label='Образование'*/}
+        {/*  info={userInfo?.user_education}*/}
+        {/*/>*/}
 
 
         <LinePersonAchievement

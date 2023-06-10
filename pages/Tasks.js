@@ -71,10 +71,10 @@ const Tasks = ({ navigation }) => {
 
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.gameButton} onPress={() => navigation.navigate('Train')}>
-          <Text style={styles.buttonText}>🚂</Text>
-          <Text style={styles.buttonText}>Поезд</Text>
-          </TouchableOpacity>
+          {/*<TouchableOpacity style={styles.gameButton} onPress={() => navigation.navigate('Train')}>*/}
+          {/*<Text style={styles.buttonText}>🚂</Text>*/}
+          {/*<Text style={styles.buttonText}>Поезд</Text>*/}
+          {/*</TouchableOpacity>*/}
       </View>
     </View>
     </Layout>
