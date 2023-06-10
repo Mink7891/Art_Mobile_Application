@@ -9,7 +9,6 @@
     "preview2": {
       "android": {
         "gradleCommand": ":app:assembleRelease",
-        "developmentClient": true,
         "buildType": "apk"
       }
     },
