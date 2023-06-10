@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Image, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Dimensions,ImageBackground} from "react-native";
 
+const screenDimensions = Dimensions.get('screen');
+
 const InfoNews = ({route, navigation}) => {
   const [desc, setDesc] = useState('');
   const [link, setLink] = useState('');
@@ -8,7 +10,7 @@ const InfoNews = ({route, navigation}) => {
   const data = route.params.newsInfo;
 
 
-  const screenDimensions = Dimensions.get('screen');
+  
 
   useEffect(() => {
     if (!data.news_desc.includes('http')) return setDesc(data.news_desc)
@@ -18,9 +20,10 @@ const InfoNews = ({route, navigation}) => {
   }, [])
 
   return (
-    <ImageBackground source={require('../assets/memoryCardBG.png')} style={{backgroundColor: '#FFF', flex: 1, paddingTop: 50}}>
-      <SafeAreaView style={styles.modal}>
-        <ScrollView>
+    <ImageBackground source={require('../assets/memoryCardBG.png')} style={{backgroundColor: '#FFF', flex: 1, paddingTop: 50}  } blurRadius={15}>
+      <ScrollView>
+        <SafeAreaView style={styles.modal}>
+        
           <View>
             <Text style={styles.modalTitle}>
               {data.news_title}
@@ -59,8 +62,9 @@ const InfoNews = ({route, navigation}) => {
                 />
               </View>
           </View>
-        </ScrollView>
-      </SafeAreaView>
+        
+        </SafeAreaView>
+      </ScrollView>
     </ImageBackground>
   );
 };
@@ -68,41 +72,71 @@ const InfoNews = ({route, navigation}) => {
 const styles = StyleSheet.create({
   modal: {
     flex: 1,
-    margin: 15,
-  },
-  buttonText: {
-    marginTop: 15,
-    marginBottom: 10,
-    fontSize: 24,
-    color: 'black',
-    textDecorationLine: 'underline',
+    paddingHorizontal: 20,
   },
   modalTitle: {
+    fontSize: 28,
+    fontWeight: 600,
+    marginBottom: 24,
+    color: 'black',
+    //textAlign: 'center',
     
-    fontSize: 25,
-    marginBottom: 4,
-    color: 'black'
   },
   infoNews: {
-    marginTop: 5,
-    marginBottom: 10,
+    marginBottom: 24,
+    backgroundColor: 'white',
+    padding: 12,
+    borderRadius: 12,
+    opacity: 0.9,
+
   },
   textInformationNews: {
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: 18,
+    color: '#3C4043',
+    
   },
   mainContent: {
-    flex: 1,
+    marginBottom: 24,
+    
+    
   },
   textDescription: {
     fontSize: 20,
-    lineHeight: 22,
+    lineHeight: 28,
+    marginBottom: 24,
+    color: '#202124',
+    backgroundColor: 'white',
+    padding: 12,
+    borderRadius: 12,
+    opacity: 0.9,
   },
   linkNews: {
-    fontSize: 20,
-    color: 'blue',
-    marginTop: 10,
-  }
-})
+    fontSize: 18,
+    color: '#1A73E8',
+    marginBottom: 24,
+    backgroundColor: 'white',
+    padding: 12,
+    borderRadius: 12,
+    opacity: 0.9,
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    shadowColor: '#202124',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 8,
+  },
+  image: {
+    width: screenDimensions.width - 100,
+    height: 350,
+    resizeMode: 'cover',
+    borderRadius: 24,
+  },
+});
+
 
 export default InfoNews;

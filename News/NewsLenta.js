@@ -6,7 +6,8 @@ import {
   Image,
   FlatList,
   SafeAreaView,
-  TouchableOpacity, ActivityIndicator
+  TouchableOpacity, ActivityIndicator,
+  ImageBackground
 
 } from "react-native";
 import React, {useEffect, useState} from "react";
@@ -50,7 +51,10 @@ const News = () => {
   };
 
   return (
-    <SafeAreaView style={stylesMain.wrapper}>
+    
+
+    <SafeAreaView style={styles.wrapper}>
+      
       <View>
         {
           error
@@ -109,53 +113,52 @@ const News = () => {
   )
 }
 
-const stylesMain = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: 'center',
-    
-  },
-  list: {
-    flex: 1,
-    flexGrow: 1,
-    paddingVertical: 8,
-  }
-})
-
-
 const styles = StyleSheet.create({
-  container: {
-    marginTop : 10,
-    height: 280,
-    width: screenDimensions.width - 115,
-    backgroundColor: '#eee',
-    marginBottom: 24,
-    borderRadius: 24,
-    
-    // ...boxShadow
-  },
-  imageContainer: {
-    flex: 1,
-    position: 'relative',
-   
-  },
-  image: {
-    flex: 1,
-    borderRadius: 24,
-    height: 400,
-    resizeMode: 'stretch',
-    
-  },
-  title: {
-    width: '100%',
-    position: 'absolute',
-    top: 5,
-    left: 15,
-    right: 5,
-    fontSize: 20,
-    fontWeight: 600,
-    color: 'white',
-  }
-})
+    wrapper: {
+      flex: 1,
+      alignItems: "center",
+      backgroundColor: "#FFFFFF",
+    },
+    errorText: {
+      fontSize: 24,
+      color: "red",
+    },
+    container: {
+      marginVertical: 10,
+      borderRadius: 24,
+      overflow: "hidden",
+      elevation: 4,
+    },
+    imageContainer: {
+      position: "relative",
+    },
+    image: {
+      width: screenDimensions.width,
+      height: 300,
+    },
+    overlay: {
+      position: "absolute",
+      bottom: 0,
+      right: 0,
+      left: 0,
+      padding: 10,
+      height: 120,
+      backgroundColor: "rgba(0,0,0,0.50)",
+      overflow: "hidden",
+      justifyContent: "flex-end",
+    },
+    title: {
+      fontSize: 18,
+      color: "#FFFFFF",
+    },
+    backgroundImage: {
+      flex: 1,
+      resizeMode: 'cover',
+      justifyContent: 'center',
+      
+  
+    },
+  });
+
 
 export default News;
