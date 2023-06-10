@@ -1,4 +1,14 @@
-import {StyleSheet, View, TextInput, SafeAreaView, Text, Alert, Pressable, TouchableOpacity} from 'react-native'
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  SafeAreaView,
+  Text,
+  Alert,
+  Pressable,
+  TouchableOpacity,
+  TouchableWithoutFeedback, Modal
+} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {clearErrorMessage, signupUser} from "../../store/slice/authSlice";
@@ -16,6 +26,7 @@ const Login = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const {passwordVisibility, rightIcon, handlePasswordVisibility} = useTogglePasswordVisibility();
+  const [modalVisible, setModalVisible] = useState(true);
 
   const {isFetching, isError, errorMessage} = useSelector(state => state.auth);
 
@@ -37,10 +48,24 @@ const Login = () => {
   )
 
 
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+
   const authUser = () => {
     dispatch(signupUser({login, password}))
       .then(async (res) => {
         if (res.payload?.status === 200) {
+          Alert.alert('Добро пожаловать', '' +
+            'Приглашаем вас в увлекательный мир нашей игры! За каждую успешно ' +
+            'пройденную игру вы будете награждены рейтингом, который открывает ' +
+            'доступ к эксклюзивному контенту. Участвуйте, достигайте новых вершин и ' +
+            'наслаждайтесь привилегиями, которые ждут вас на пути к успеху!', [
+            {
+              text: "Хорошо!"
+            }
+          ])
           await navigation.navigate('Course')
         }
       })

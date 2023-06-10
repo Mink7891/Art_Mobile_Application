@@ -43,13 +43,13 @@ export default function Navigate() {
   const Home = () => {
     return (
       <Tab.Navigator screenOptions={{
-        headerShown: false
+        headerShown: false,
       }}>
         <Tab.Screen name="Tasks" component={Tasks} options={{
           title: 'Маршрут Заданий',
-          tabBarIcon: () => (
-            <FontAwesome5 name="tasks" color='black' size={25} />
-          )
+          tabBarIcon: () => {
+            return <FontAwesome5 name="tasks" color='black' size={25}/>
+          }
         }} />
         <Tab.Screen name="RatingUser" component={RatingPage} options={{
           title: 'Соревнования ',
