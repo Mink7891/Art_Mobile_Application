@@ -6,7 +6,9 @@ const initialState = {
   isAuth: false,
   isError: false,
   user_rating: 0,
-  userInfo: {},
+  userInfo: {
+
+  },
   token: '',
   errorMessage: '',
 }
@@ -66,8 +68,8 @@ export const authSlice = createSlice({
       state.token = '';
       state.userInfo = ''
     },
-    updateRate: (state) => {
-      state.user_rating++;
+    updateRate: (state, action) => {
+      state.user_rating += action.payload;
     }
   },
   extraReducers: (builder) => {

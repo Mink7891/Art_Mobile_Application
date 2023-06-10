@@ -1,6 +1,6 @@
 import {StatusBar} from 'expo-status-bar';
 import {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, Dimensions, ImageBackground, Button} from 'react-native';
+import {StyleSheet, Text, View, ImageBackground, Button} from 'react-native';
 import {answerByUser, fetchAchievementAdd, fetchData} from '../../../API/tasks.api';
 
 import QuizQuestion from './QuizQuestion';
@@ -10,6 +10,7 @@ import FinishElement from "../FinishElement";
 
 export default function Quiz() {
   const dispatch = useDispatch();
+
   const [quiz, setQuiz] = useState(null)
   const [step, setStep] = useState(0)
   const [nextButton, setNextButton] = useState(false)
@@ -70,6 +71,7 @@ export default function Quiz() {
         }
       }
     }
+
     achievementAdd()
   }, [step])
 
@@ -85,7 +87,7 @@ export default function Quiz() {
           ? step !== quiz.length
             ? <QuizQuestion chooseButton={chooseButton} isDisable={disable} onClickVariant={onClickVariant}
                             question={quiz[step]}/>
-            : <FinishElement countQuestion={step} result={score} />
+            : <FinishElement countQuestion={step} result={score}/>
           : <Text>Загрузка...</Text>}
         {answer ? <Text style={styles.answerContainer}>{quiz[step].task_correct_desc}</Text> : <></>}
         {nextButton ? <Button title='Следующий вопрос' onPress={() => nextQuestion()}></Button> : <></>}
